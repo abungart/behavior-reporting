@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 // Basic class component structure for React with default state
@@ -11,10 +12,11 @@ class Teacher extends Component {
     heading: "Teacher Page!",
   };
 
-  render() {
+  render(props) {
     return (
       <div>
         <h2>{this.state.heading}</h2>
+        <LogOutButton className="log-in" />
       </div>
     );
   }

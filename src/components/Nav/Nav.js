@@ -11,8 +11,17 @@ const Nav = (props) => {
     text: "Login",
   };
 
-  if (props.store.user.id != null) {
+  if (props.store.user.id != null && props.store.user.is_admin) {
     loginLinkData.path = "/admin";
+    loginLinkData.text = "Home";
+  } else if (props.store.user.id != null && props.store.user.is_teacher) {
+    loginLinkData.path = "/teacher";
+    loginLinkData.text = "Home";
+  } else if (props.store.user.id != null && props.store.user.is_specials) {
+    loginLinkData.path = "/specials";
+    loginLinkData.text = "Home";
+  } else {
+    loginLinkData.path = "/student";
     loginLinkData.text = "Home";
   }
 
@@ -25,7 +34,7 @@ const Nav = (props) => {
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
-          and call this link 'Login / Register' if they are not */}
+          and call this link 'Login' if they are not */}
           {loginLinkData.text}
         </Link>
         {/* Show the link to the logout button if the user is logged in */}

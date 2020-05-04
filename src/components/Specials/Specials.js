@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 // Basic class component structure for React with default state
@@ -15,6 +16,7 @@ class Specials extends Component {
     return (
       <div>
         <h2>{this.state.heading}</h2>
+        <LogOutButton className="log-in" />
       </div>
     );
   }
