@@ -14,7 +14,10 @@ import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
+import AdminPage from "../Admin/Admin";
+import TeacherPage from "../Teacher/Teacher";
+import SpecialsPage from "../Specials/Specials";
+import StudentPage from "../Student/Student";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
@@ -40,16 +43,17 @@ class App extends Component {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            <ProtectedRoute exact path="/admin" component={UserPage} />
-            {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
-            <ProtectedRoute exact path="/info" component={InfoPage} />
+            <ProtectedRoute exact path="/user" component={UserPage} />
+            <ProtectedRoute exact path="/admin" component={AdminPage} />
+            <ProtectedRoute exact path="/teacher" component={TeacherPage} />
+            <ProtectedRoute exact path="/specials" component={SpecialsPage} />
+            <ProtectedRoute exact path="/student" component={StudentPage} />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will be redirected to the authRedirect path provided. */}
             <ProtectedRoute
               exact
               path="/login"
-              authRedirect="/admin"
+              authRedirect="/user"
               component={LoginPage}
             />
             <ProtectedRoute
