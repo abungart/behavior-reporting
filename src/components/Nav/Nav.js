@@ -1,19 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import LogOutButton from "../LogOutButton/LogOutButton";
+import "./Nav.css";
+import mapStoreToProps from "../../redux/mapStoreToProps";
 
 const Nav = (props) => {
   let loginLinkData = {
-    path: '/home',
-    text: 'Login / Register',
+    path: "/home",
+    text: "Login",
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = '/admin';
-    loginLinkData.text = 'Home';
+    loginLinkData.path = "/admin";
+    loginLinkData.text = "Home";
   }
 
   return (
@@ -34,13 +34,9 @@ const Nav = (props) => {
             <Link className="nav-link" to="/info">
               Info Page
             </Link>
-            <LogOutButton className="nav-link"/>
+            <LogOutButton className="nav-link" />
           </>
         )}
-        {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
-          About
-        </Link>
       </div>
     </div>
   );
