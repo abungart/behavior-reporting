@@ -13,7 +13,6 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import UserPage from "../UserPage/UserPage";
 import AdminPage from "../Admin/Admin";
 import TeacherPage from "../Teacher/Teacher";
 import SpecialsPage from "../Specials/Specials";
@@ -21,6 +20,9 @@ import StudentPage from "../Student/Student";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
+import StaffRegister from "../StaffRegistration/StaffRegistration";
+import StudentRegister from "../StudentRegistration/StudentRegistration";
+import mapStoreToProps from "../../redux/mapStoreToProps";
 
 import "./App.css";
 
@@ -30,6 +32,7 @@ class App extends Component {
   }
 
   render() {
+    let userRoute = "/" + this.props.store.user.role;
     return (
       <Router>
         <div>
@@ -39,21 +42,31 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
 
             <Route exact path="/home" component={LandingPage} />
+
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            <ProtectedRoute exact path="/user" component={UserPage} />
             <ProtectedRoute exact path="/admin" component={AdminPage} />
             <ProtectedRoute exact path="/teacher" component={TeacherPage} />
             <ProtectedRoute exact path="/specials" component={SpecialsPage} />
             <ProtectedRoute exact path="/student" component={StudentPage} />
+            <ProtectedRoute
+              exact
+              path="/staffRegister"
+              component={StaffRegister}
+            />
+            <ProtectedRoute
+              exact
+              path="/studentRegister"
+              component={StudentRegister}
+            />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will be redirected to the authRedirect path provided. */}
             <ProtectedRoute
               exact
               path="/login"
-              authRedirect="/user"
+              authRedirect={userRoute}
               component={LoginPage}
             />
             <ProtectedRoute
@@ -73,4 +86,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default connect(mapStoreToProps)(App);

@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class LoginPage extends Component {
+  componentDidMount() {
+    this.props.history.push("/login");
+  }
+
   state = {
     username: "",
     password: "",

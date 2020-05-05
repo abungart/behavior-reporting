@@ -11,25 +11,32 @@ const Nav = (props) => {
     text: "Login",
   };
 
-  if (props.store.user.id != null && props.store.user.is_admin) {
+  if (props.store.user.id != null && props.store.user.role === "admin") {
     loginLinkData.path = "/admin";
     loginLinkData.text = "Home";
-  } else if (props.store.user.id != null && props.store.user.is_teacher) {
+  } else if (
+    props.store.user.id != null &&
+    props.store.user.role === "teacher"
+  ) {
     loginLinkData.path = "/teacher";
     loginLinkData.text = "Home";
-  } else if (props.store.user.id != null && props.store.user.is_specials) {
+  } else if (
+    props.store.user.id != null &&
+    props.store.user.role === "specials"
+  ) {
     loginLinkData.path = "/specials";
     loginLinkData.text = "Home";
-  } else {
+  } else if (
+    props.store.user.id != null &&
+    props.store.user.role === "student"
+  ) {
     loginLinkData.path = "/student";
     loginLinkData.text = "Home";
   }
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Behavior Tracking and Reporting</h2>
-      </Link>
+      <h2 className="nav-title">Behavior Tracking and Reporting</h2>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
@@ -37,7 +44,21 @@ const Nav = (props) => {
           and call this link 'Login' if they are not */}
           {loginLinkData.text}
         </Link>
-        {/* Show the link to the logout button if the user is logged in */}
+        {/* Conditional rendering for the NAV bar to show Logout, Register Students, and Register Staff*/}
+        {props.store.user.role === "admin" && (
+          <>
+            <Link className="nav-link" to="/staffRegister">
+              Register Staff
+            </Link>
+          </>
+        )}
+        {props.store.user.role === "teacher" && (
+          <>
+            <Link className="nav-link" to="/studentRegister">
+              Register Students
+            </Link>
+          </>
+        )}
         {props.store.user.id && (
           <>
             <LogOutButton className="nav-link" />
