@@ -25,6 +25,13 @@ class Admin extends Component {
     return (
       <div>
         <h2>"{this.state.heading}"</h2>
+        <div>
+          <p>{this.props.store.currentUserData.staff_name}</p>
+          <p>Email Address: {this.props.store.currentUserData.email_address}</p>
+          <p>Position: {this.props.store.currentUserData.position}</p>
+          <p>Role: {this.props.store.currentUserData.role}</p>
+          <button type="button">Edit</button>
+        </div>
         <LogOutButton className="log-in" />
       </div>
     );

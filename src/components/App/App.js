@@ -19,7 +19,6 @@ import SpecialsPage from "../Specials/Specials";
 import StudentPage from "../Student/Student";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
-import RegisterPage from "../RegisterPage/RegisterPage";
 import StaffRegister from "../StaffRegistration/StaffRegistration";
 import StudentRegister from "../StudentRegistration/StudentRegistration";
 import mapStoreToProps from "../../redux/mapStoreToProps";
@@ -68,12 +67,6 @@ class App extends Component {
               path="/login"
               authRedirect={userRoute}
               component={LoginPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/registration"
-              authRedirect="/admin"
-              component={RegisterPage}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

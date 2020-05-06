@@ -35,6 +35,7 @@ router.get("/staff/:username", rejectUnauthenticated, (req, res) => {
 router.get("/student/:username", rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM "student"
   JOIN "user" ON "user".username = "student".username
+  JOIN "staff" ON "staff".id = "student".teacher_id
   WHERE "user".username = $1;`;
   pool
     .query(queryText, [req.params.username])
@@ -57,12 +58,12 @@ router.post("/register/staff", (req, res, next) => {
   console.log(user);
 
   const staffQueryText =
-    'INSERT INTO "staff" (name, email_address, position, username) VALUES ($1, $2, $3, $4)';
+    'INSERT INTO "staff" (staff_name, email_address, position, username) VALUES ($1, $2, $3, $4)';
   const queryText =
     'INSERT INTO "user" (username, password, role) VALUES ($1, $2, $3)';
   pool
     .query(staffQueryText, [
-      user.name,
+      user.staff_name,
       user.email_address,
       user.position,
       user.username,
@@ -75,7 +76,7 @@ router.post("/register/staff", (req, res, next) => {
 router.post("/register/students", (req, res, next) => {
   const student = req.body;
   const studentPassword = encryptLib.encryptPassword(req.body.password);
-  console.log(user);
+  console.log("in post", student);
 
   const studentQueryText =
     'INSERT INTO "student" (name, nickname, home_phone, cell_phone, work_phone, email_address, username, teacher_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';

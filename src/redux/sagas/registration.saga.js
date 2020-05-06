@@ -29,6 +29,7 @@ function* registerStudents(action) {
 
     // passes the username and password from the payload to the server
     yield axios.post("api/user/register/students", action.payload);
+    console.log("in Saga:", action.payload);
 
     // // automatically log a user in after registration
     // yield put({ type: "LOGIN", payload: action.payload });

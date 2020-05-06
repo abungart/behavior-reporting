@@ -14,7 +14,7 @@ class StaffRegistration extends Component {
     username: "",
     password: "",
     role: "",
-    name: "",
+    staff_name: "",
     email_address: "",
     position: "",
   };
@@ -22,7 +22,7 @@ class StaffRegistration extends Component {
   registerUser = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password && this.state.name) {
+    if (this.state.username && this.state.password && this.state.staff_name) {
       console.log(this.state);
       this.props.dispatch({
         type: "REGISTER_STAFF",
@@ -30,7 +30,7 @@ class StaffRegistration extends Component {
           username: this.state.username,
           password: this.state.password,
           role: this.state.role,
-          name: this.state.name,
+          staff_name: this.state.staff_name,
           email_address: this.state.email_address,
           position: this.state.position,
         },
@@ -86,13 +86,13 @@ class StaffRegistration extends Component {
             </label>
           </div>
           <div>
-            <label htmlFor="name">
+            <label htmlFor="staff_name">
               Name:
               <input
-                type="name"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleInputChangeFor("name")}
+                type="staff_name"
+                name="staff_name"
+                value={this.state.staff_name}
+                onChange={this.handleInputChangeFor("staff_name")}
               />
             </label>
           </div>

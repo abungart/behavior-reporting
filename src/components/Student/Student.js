@@ -25,6 +25,16 @@ class Student extends Component {
     return (
       <div>
         <h2>{this.state.heading}</h2>
+        <div>
+          <p>{this.props.store.currentUserData.name}</p>
+          <p>{this.props.store.currentUserData.nickname}</p>
+          <p>Email Address: {this.props.store.currentUserData.email_address}</p>
+          <p>Home Phone: {this.props.store.currentUserData.home_phone}</p>
+          <p>Cell Phone: {this.props.store.currentUserData.cell_phone}</p>
+          <p>Work Phone: {this.props.store.currentUserData.work_phone}</p>
+          <p>Teacher: {this.props.store.currentUserData.staff_name}</p>
+          <button type="button">Edit</button>
+        </div>
         <LogOutButton className="log-in" />
       </div>
     );
