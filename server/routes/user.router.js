@@ -14,6 +14,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+// GET individual staff data
 router.get("/staff/:username", rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM "staff"
   JOIN "user" ON "user".username = "staff".username
@@ -25,7 +26,24 @@ router.get("/staff/:username", rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch((err) => {
-      console.log("Error completing GET admin query", err);
+      console.log("Error completing GET staff query", err);
+      res.sendStatus(500);
+    });
+});
+
+// GET individual student data
+router.get("/student/:username", rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "student"
+  JOIN "user" ON "user".username = "student".username
+  WHERE "user".username = $1;`;
+  pool
+    .query(queryText, [req.params.username])
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET student query", err);
       res.sendStatus(500);
     });
 });

@@ -24,6 +24,7 @@ function* fetchUser() {
   }
 }
 
+// Used to get individual staff
 function* fetchStaff(action) {
   try {
     const thisUser = action.payload;
@@ -40,9 +41,27 @@ function* fetchStaff(action) {
   }
 }
 
+// Used to get individual students
+function* fetchStudent(action) {
+  try {
+    const thisUser = action.payload;
+    const queryText = `/api/user/student/${thisUser.username}`;
+    const response = yield axios.get(queryText);
+    console.log("in saga", response.data[0]);
+
+    // now that the session has given us a user object
+    // with an id and username set the client-side user object to let
+    // the client-side code know the user is logged in
+    yield put({ type: "SET_USER_INFO", payload: response.data[0] });
+  } catch (error) {
+    console.log("Student User get request failed", error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest("FETCH_USER", fetchUser);
   yield takeLatest("FETCH_STAFF", fetchStaff);
+  yield takeLatest("FETCH_STUDENT", fetchStudent);
 }
 
 export default userSaga;
