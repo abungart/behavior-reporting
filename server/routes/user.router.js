@@ -14,6 +14,22 @@ router.get("/", rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
+router.get("/staff/:username", rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "staff"
+  JOIN "user" ON "user".username = "staff".username
+  WHERE "user".username = $1;`;
+  pool
+    .query(queryText, [req.params.username])
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET admin query", err);
+      res.sendStatus(500);
+    });
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
@@ -39,8 +55,8 @@ router.post("/register/staff", (req, res, next) => {
 });
 
 router.post("/register/students", (req, res, next) => {
-  const user = req.body;
-  const password = encryptLib.encryptPassword(req.body.password);
+  const student = req.body;
+  const studentPassword = encryptLib.encryptPassword(req.body.password);
   console.log(user);
 
   const studentQueryText =
@@ -49,16 +65,22 @@ router.post("/register/students", (req, res, next) => {
     'INSERT INTO "user" (username, password, role) VALUES ($1, $2, $3)';
   pool
     .query(studentQueryText, [
-      user.name,
-      user.nickname,
-      user.home_phone,
-      user.cell_phone,
-      user.work_phone,
-      user.email_address,
-      user.username,
-      user.teacher_id,
+      student.name,
+      student.nickname,
+      student.home_phone,
+      student.cell_phone,
+      student.work_phone,
+      student.email_address,
+      student.username,
+      student.teacher_id,
     ])
-    .then(() => pool.query(userQueryText, [user.username, password, user.role]))
+    .then(() =>
+      pool.query(userQueryText, [
+        student.username,
+        studentPassword,
+        student.role,
+      ])
+    )
     .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
 });
