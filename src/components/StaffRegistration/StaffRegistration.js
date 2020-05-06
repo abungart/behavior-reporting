@@ -1,20 +1,139 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Select from "react-select";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
-// Basic class component structure for React with default state
-// value setup. When making a new component be sure to replace
-// the component name TemplateClass with the name for the new
-// component.
+const roles = [
+  { value: "teacher", label: "Teacher" },
+  { value: "specials", label: "Specials Teacher" },
+  { value: "admin", label: "Administrator" },
+];
+
 class StaffRegistration extends Component {
   state = {
-    heading: "Staff Registration",
+    username: "",
+    password: "",
+    role: "",
+    name: "",
+    email_address: "",
+    position: "",
+  };
+
+  registerUser = (event) => {
+    event.preventDefault();
+
+    if (this.state.username && this.state.password && this.state.name) {
+      console.log(this.state);
+      this.props.dispatch({
+        type: "REGISTER_STAFF",
+        payload: {
+          username: this.state.username,
+          password: this.state.password,
+          role: this.state.role,
+          name: this.state.name,
+          email_address: this.state.email_address,
+          position: this.state.position,
+        },
+      });
+    } else {
+      this.props.dispatch({ type: "REGISTRATION_INPUT_ERROR" });
+    }
+  }; // end registerUser
+
+  handleInputChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  };
+
+  handleRoleChange = (selectedOption) => {
+    this.setState({
+      role: selectedOption.value,
+    });
   };
 
   render() {
+    const { selectedOption } = this.state.role;
     return (
       <div>
-        <h2>{this.state.heading}</h2>
+        {this.props.errors.registrationMessage && (
+          <h2 className="alert" role="alert">
+            {this.props.errors.registrationMessage}
+          </h2>
+        )}
+        <form className="formPanel" onSubmit={this.registerUser}>
+          <h1>Register New Staff</h1>
+          <div>
+            <label htmlFor="username">
+              Username:
+              <input
+                type="text"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleInputChangeFor("username")}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="password">
+              Password:
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleInputChangeFor("password")}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="name">
+              Name:
+              <input
+                type="name"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleInputChangeFor("name")}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="email_address">
+              Email Address:
+              <input
+                type="email_address"
+                name="email_address"
+                value={this.state.email_address}
+                onChange={this.handleInputChangeFor("email_address")}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="position">
+              Position:
+              <input
+                type="position"
+                name="position"
+                value={this.state.position}
+                onChange={this.handleInputChangeFor("position")}
+              />
+            </label>
+          </div>
+          <div>
+            <Select
+              value={selectedOption}
+              onChange={this.handleRoleChange}
+              options={roles}
+            />
+          </div>
+          <div>
+            <input
+              className="register"
+              type="submit"
+              name="submit"
+              value="Register"
+            />
+          </div>
+        </form>
       </div>
     );
   }
