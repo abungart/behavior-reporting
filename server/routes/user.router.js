@@ -49,6 +49,38 @@ router.get("/student/:username", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// GET staff list data
+router.get("/staffList", rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "staff";`;
+  pool
+    .query(queryText)
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET staff list query", err);
+      res.sendStatus(500);
+    });
+});
+
+// GET student list data
+router.get("/studentList/:id", rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "student"
+  JOIN "user" ON "user".id = "student".teacher_id
+  WHERE "student".teacher_id = $1;`;
+  pool
+    .query(queryText, [req.params.id])
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET staff list query", err);
+      res.sendStatus(500);
+    });
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted

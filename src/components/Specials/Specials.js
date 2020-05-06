@@ -14,6 +14,9 @@ class Specials extends Component {
       type: "FETCH_STAFF",
       payload: this.props.store.user,
     });
+    this.props.dispatch({
+      type: "GET_STAFF_LIST",
+    });
   }
 
   state = {
@@ -22,6 +25,7 @@ class Specials extends Component {
 
   render() {
     console.log("Specials Render", this.props.store.currentUserData);
+    console.log("Staff List", this.props.store.userList);
 
     return (
       <div>

@@ -14,6 +14,9 @@ class Admin extends Component {
       type: "FETCH_STAFF",
       payload: this.props.store.user,
     });
+    this.props.dispatch({
+      type: "GET_STAFF_LIST",
+    });
   }
 
   state = {
@@ -22,6 +25,7 @@ class Admin extends Component {
 
   render() {
     console.log("Admin Render", this.props.store.currentUserData);
+    console.log("Staff List", this.props.store.userList);
     return (
       <div>
         <h2>"{this.state.heading}"</h2>

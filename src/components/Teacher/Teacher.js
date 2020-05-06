@@ -14,6 +14,10 @@ class Teacher extends Component {
       type: "FETCH_STAFF",
       payload: this.props.store.user,
     });
+    this.props.dispatch({
+      type: "GET_STUDENT_LIST",
+      payload: this.props.store.user,
+    });
   }
 
   state = {
@@ -22,6 +26,7 @@ class Teacher extends Component {
 
   render() {
     console.log("Teacher Render", this.props.store.currentUserData);
+    console.log("Student List", this.props.store.userList);
     return (
       <div>
         <h2>{this.state.heading}</h2>
