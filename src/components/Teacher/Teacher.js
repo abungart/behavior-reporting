@@ -8,11 +8,20 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 // the component name TemplateClass with the name for the new
 // component.
 class Teacher extends Component {
+  componentDidMount() {
+    console.log("Teacher Mounted", this.props.store.user);
+    this.props.dispatch({
+      type: "FETCH_STAFF",
+      payload: this.props.store.user,
+    });
+  }
+
   state = {
     heading: "Teacher Page!",
   };
 
-  render(props) {
+  render() {
+    console.log("Teacher Render", this.props.store.currentUserData);
     return (
       <div>
         <h2>{this.state.heading}</h2>
