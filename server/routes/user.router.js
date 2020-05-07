@@ -209,4 +209,29 @@ router.put("/editStaff", (req, res) => {
     });
 });
 
+// EDIT student
+router.put("/editStudent", (req, res) => {
+  const updatedStudent = req.body;
+  const queryText = `UPDATE "student" SET "name" = $1, "nickname" = $2, "email_address" = $3, "home_phone" = $4, "cell_phone" = $5, "work_phone" = $6 WHERE "username" = $7;`;
+  const queryValues = [
+    updatedStudent.name,
+    updatedStudent.nickname,
+    updatedStudent.email_address,
+    updatedStudent.home_phone,
+    updatedStudent.cell_phone,
+    updatedStudent.work_phone,
+    updatedStudent.username,
+  ];
+
+  pool
+    .query(queryText, queryValues)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error in PUT student query", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

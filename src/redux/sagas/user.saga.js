@@ -67,11 +67,21 @@ function* updateStaff(action) {
   }
 }
 
+//Used to update students
+function* updateStudent(action) {
+  try {
+    yield axios.put("/api/user/editStudent", action.payload);
+  } catch (err) {
+    console.log("Error with editStudent", err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest("FETCH_USER", fetchUser);
   yield takeLatest("FETCH_STAFF", fetchStaff);
   yield takeLatest("FETCH_STUDENT", fetchStudent);
   yield takeLatest("UPDATE_STAFF", updateStaff);
+  yield takeLatest("UPDATE_STUDENT", updateStudent);
 }
 
 export default userSaga;

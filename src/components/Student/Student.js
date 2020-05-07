@@ -27,21 +27,169 @@ class Student extends Component {
     work_phone: "",
   };
 
+  // EDIT button handlers
+  editUser = () => {
+    this.setState({
+      inEdit: true,
+    });
+    console.log("In Edit User:", this.props.store.currentUserData);
+  };
+
+  submitEdit = () => {
+    this.setState({
+      inEdit: false,
+    });
+
+    let updatedUser = {
+      name: this.state.name,
+      nickname: this.state.nickname,
+      email_address: this.state.email_address,
+      home_phone: this.state.home_phone,
+      cell_phone: this.state.cell_phone,
+      work_phone: this.state.work_phone,
+      username: this.props.store.currentUserData.username,
+    };
+
+    if (updatedUser.name == null || updatedUser.name === "") {
+      updatedUser.name = this.props.store.currentUserData.name;
+    }
+
+    if (updatedUser.nickname == null || updatedUser.nickname === "") {
+      updatedUser.nickname = this.props.store.currentUserData.nickname;
+    }
+
+    if (updatedUser.email_address == null || updatedUser.email_address === "") {
+      updatedUser.email_address = this.props.store.currentUserData.email_address;
+    }
+
+    if (updatedUser.home_phone == null || updatedUser.home_phone === "") {
+      updatedUser.home_phone = this.props.store.currentUserData.home_phone;
+    }
+
+    if (updatedUser.cell_phone == null || updatedUser.cell_phone === "") {
+      updatedUser.cell_phone = this.props.store.currentUserData.cell_phone;
+    }
+
+    if (updatedUser.work_phone == null || updatedUser.work_phone === "") {
+      updatedUser.work_phone = this.props.store.currentUserData.work_phone;
+    }
+
+    this.props.dispatch({
+      type: "UPDATE_STUDENT",
+      payload: updatedUser,
+    });
+  };
+
+  cancelEdit = () => {
+    this.setState({
+      inEdit: false,
+    });
+    console.log("Edit Cancelled");
+  };
+
+  // Handle text input
+  handleInputChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  };
+
   render() {
-    console.log("Student Render", this.props.store.currentUserData);
     return (
       <div>
         <h2>{this.state.heading}</h2>
-        <div>
-          <p>{this.props.store.currentUserData.name}</p>
-          <p>{this.props.store.currentUserData.nickname}</p>
-          <p>Email Address: {this.props.store.currentUserData.email_address}</p>
-          <p>Home Phone: {this.props.store.currentUserData.home_phone}</p>
-          <p>Cell Phone: {this.props.store.currentUserData.cell_phone}</p>
-          <p>Work Phone: {this.props.store.currentUserData.work_phone}</p>
-          <p>Teacher: {this.props.store.currentUserData.staff_name}</p>
-          <button type="button">Edit</button>
-        </div>
+        {this.state.inEdit === false && (
+          <div>
+            <p>{this.props.store.currentUserData.name}</p>
+            <p>{this.props.store.currentUserData.nickname}</p>
+            <p>
+              Email Address: {this.props.store.currentUserData.email_address}
+            </p>
+            <p>Home Phone: {this.props.store.currentUserData.home_phone}</p>
+            <p>Cell Phone: {this.props.store.currentUserData.cell_phone}</p>
+            <p>Work Phone: {this.props.store.currentUserData.work_phone}</p>
+            <p>Teacher: {this.props.store.currentUserData.staff_name}</p>
+            <button type="button" onClick={this.editUser}>
+              Edit
+            </button>
+          </div>
+        )}
+        {this.state.inEdit === true && (
+          <div>
+            <div>
+              <label htmlFor="name">
+                Name:
+                <input
+                  type="name"
+                  name="name"
+                  defaultValue={this.props.store.currentUserData.name}
+                  onChange={this.handleInputChangeFor("name")}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="nickname">
+                Nickname:
+                <input
+                  type="nickname"
+                  name="nickname"
+                  defaultValue={this.props.store.currentUserData.nickname}
+                  onChange={this.handleInputChangeFor("nickname")}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="email_address">
+                Email Address:
+                <input
+                  type="email_address"
+                  name="email_address"
+                  defaultValue={this.props.store.currentUserData.email_address}
+                  onChange={this.handleInputChangeFor("email_address")}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="home_phone">
+                Home Phone:
+                <input
+                  type="home_phone"
+                  name="home_phone"
+                  defaultValue={this.props.store.currentUserData.home_phone}
+                  onChange={this.handleInputChangeFor("home_phone")}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="cell_phone">
+                Cell Phone:
+                <input
+                  type="cell_phone"
+                  name="cell_phone"
+                  defaultValue={this.props.store.currentUserData.cell_phone}
+                  onChange={this.handleInputChangeFor("cell_phone")}
+                />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="work_phone">
+                Work Phone:
+                <input
+                  type="work_phone"
+                  name="work_phone"
+                  defaultValue={this.props.store.currentUserData.work_phone}
+                  onChange={this.handleInputChangeFor("work_phone")}
+                />
+              </label>
+            </div>
+            <button type="button" onClick={this.submitEdit}>
+              Submit
+            </button>
+            <button type="button" onClick={this.cancelEdit}>
+              Cancel
+            </button>
+          </div>
+        )}
         <LogOutButton className="log-in" />
       </div>
     );
