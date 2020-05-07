@@ -47,12 +47,12 @@ function* fetchStudent(action) {
     const thisUser = action.payload;
     const queryText = `/api/user/student/${thisUser.username}`;
     const response = yield axios.get(queryText);
-    console.log("in saga", response.data[0]);
+    console.log("in saga", response.data);
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
-    yield put({ type: "SET_USER_INFO", payload: response.data[0] });
+    yield put({ type: "SET_USER_INFO", payload: response.data });
   } catch (error) {
     console.log("Student User get request failed", error);
   }

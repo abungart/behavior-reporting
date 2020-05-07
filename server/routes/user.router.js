@@ -51,7 +51,7 @@ router.get("/student/:username", rejectUnauthenticated, (req, res) => {
 
 // GET staff list data
 router.get("/staffList", rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM "staff";`;
+  const queryText = `SELECT "staff".id, "staff".staff_name, "staff".position, "staff".username FROM "staff";`;
   pool
     .query(queryText)
     .then((result) => {
@@ -66,8 +66,8 @@ router.get("/staffList", rejectUnauthenticated, (req, res) => {
 
 // GET student list data
 router.get("/studentList/:id", rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM "student"
-  JOIN "user" ON "user".id = "student".teacher_id
+  const queryText = `SELECT "student".id, "student".name, "student".username FROM "student"
+  JOIN "user" ON "student".teacher_id = "user".id
   WHERE "student".teacher_id = $1;`;
   pool
     .query(queryText, [req.params.id])
@@ -149,6 +149,42 @@ router.post("/logout", (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);
+});
+
+// DELETE from Student List
+router.delete("/delete/:username", (req, res) => {
+  const queryText = `DELETE FROM "student" WHERE "username" = $1;`;
+  pool
+    .query(queryText, [req.params.username])
+    .then(() => {
+      const nextQuery = `DELETE FROM "user" WHERE "username" = $1`;
+      pool.query(nextQuery, [req.params.username]);
+    })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error in DELETE STUDENT query", err);
+      res.sendStatus(500);
+    });
+});
+
+// DELETE from Staff List
+router.delete("/deleteStaff/:username", (req, res) => {
+  const queryText = `DELETE FROM "staff" WHERE "username" = $1;`;
+  pool
+    .query(queryText, [req.params.username])
+    .then(() => {
+      const nextQuery = `DELETE FROM "user" WHERE "username" = $1`;
+      pool.query(nextQuery, [req.params.username]);
+    })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error in DELETE STAFF query", err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;

@@ -29,9 +29,31 @@ function* getStudentList(action) {
   }
 }
 
+// Delete Individual student from list
+function* deleteStudent(action) {
+  try {
+    yield axios.delete(action.payload);
+    // yield put({ type: "GET_STUDENT_LIST"}); REFRESH THE PAGE
+  } catch (err) {
+    console.log("Error with deleteStudent", err);
+  }
+}
+
+// Delete Individual staff from list
+function* deleteStaff(action) {
+  try {
+    yield axios.delete(action.payload);
+    // yield put({ type: "GET_STAFF_LIST"}); REFRESH THE PAGE
+  } catch (err) {
+    console.log("Error with deleteStudent", err);
+  }
+}
+
 function* userListSaga() {
   yield takeLatest("GET_STAFF_LIST", getStaffList);
   yield takeLatest("GET_STUDENT_LIST", getStudentList);
+  yield takeLatest("DELETE_STUDENT", deleteStudent);
+  yield takeLatest("DELETE_STAFF", deleteStaff);
 }
 
 export default userListSaga;

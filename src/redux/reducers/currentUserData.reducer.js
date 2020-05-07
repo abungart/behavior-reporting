@@ -2,6 +2,8 @@ const currentUserDataReducer = (state = {}, action) => {
   switch (action.type) {
     case "SET_USER_INFO":
       return action.payload;
+    case "UNSET_USER_INFO":
+      return {};
     default:
       return state;
   }
