@@ -18,6 +18,13 @@ class Student extends Component {
 
   state = {
     heading: "Student Page!",
+    inEdit: false,
+    name: "",
+    nickname: "",
+    email_address: "",
+    home_phone: "",
+    cell_phone: "",
+    work_phone: "",
   };
 
   render() {

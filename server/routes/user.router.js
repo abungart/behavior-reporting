@@ -187,4 +187,26 @@ router.delete("/deleteStaff/:username", (req, res) => {
     });
 });
 
+// EDIT staff
+router.put("/editStaff", (req, res) => {
+  const updatedStaff = req.body;
+  const queryText = `UPDATE "staff" SET "staff_name" = $1, "email_address" = $2, "position" = $3 WHERE "username" = $4;`;
+  const queryValues = [
+    updatedStaff.staff_name,
+    updatedStaff.email_address,
+    updatedStaff.position,
+    updatedStaff.username,
+  ];
+
+  pool
+    .query(queryText, queryValues)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error in PUT staff query", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

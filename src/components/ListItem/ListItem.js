@@ -15,7 +15,9 @@ class ListItem extends Component {
     return (
       <li className="user_list">
         <h2>{this.props.userItem.staff_name}</h2>
-        <button onClick={this.deleteClick}>Delete Staff</button>
+        {this.props.store.user.role === "admin" && (
+          <button onClick={this.deleteClick}>Delete Staff</button>
+        )}
       </li>
     );
   }
