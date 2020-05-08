@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
-class BehaviorUserData extends Component {
+class StudentData extends Component {
   state = {
     inEdit: false,
     name: "",
@@ -176,4 +176,4 @@ class BehaviorUserData extends Component {
     );
   }
 }
-export default connect(mapStoreToProps)(BehaviorUserData);
+export default connect(mapStoreToProps)(StudentData);

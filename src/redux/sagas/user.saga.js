@@ -98,7 +98,7 @@ function* userSaga() {
   yield takeLatest("FETCH_STUDENT", fetchStudent);
   yield takeLatest("UPDATE_STAFF", updateStaff);
   yield takeLatest("UPDATE_STUDENT", updateStudent);
-  yield takeLatest("FETCH_STUDENT_INFO_FOR_BEHAVIOR", fetchStudentInfo);
+  yield takeLatest("FETCH_STUDENT_SEPARATE", fetchStudentInfo);
 }
 
 export default userSaga;

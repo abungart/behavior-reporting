@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import BehaviorUserData from "../BehaviorUserData/BehaviorUserData";
+import StudentData from "../StudentData/StudentData";
 
 class IndividualBehavior extends Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class IndividualBehavior extends Component {
     return (
       <div>
         <h2>"{this.state.heading}"</h2>
-        <BehaviorUserData />
+        <StudentData />
       </div>
     );
   }

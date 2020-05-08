@@ -15,7 +15,7 @@ class StudentListItem extends Component {
   studentBehavior = () => {
     console.log("In studentBehavior Click", this.props.userItem);
     this.props.dispatch({
-      type: "FETCH_STUDENT_INFO_FOR_BEHAVIOR",
+      type: "FETCH_STUDENT_SEPARATE",
       payload: this.props.userItem,
     });
 
