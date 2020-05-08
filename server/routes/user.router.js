@@ -34,9 +34,7 @@ router.get("/staff/:username", rejectUnauthenticated, (req, res) => {
 // GET individual student data
 router.get("/student/:username", rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM "student"
-  JOIN "user" ON "user".username = "student".username
-  JOIN "staff" ON "staff".id = "student".teacher_id
-  WHERE "user".username = $1;`;
+  WHERE "student".username = $1;`;
   pool
     .query(queryText, [req.params.username])
     .then((result) => {

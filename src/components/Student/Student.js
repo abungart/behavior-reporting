@@ -108,7 +108,6 @@ class Student extends Component {
             <p>Home Phone: {this.props.store.currentUserData.home_phone}</p>
             <p>Cell Phone: {this.props.store.currentUserData.cell_phone}</p>
             <p>Work Phone: {this.props.store.currentUserData.work_phone}</p>
-            <p>Teacher: {this.props.store.currentUserData.staff_name}</p>
             <button type="button" onClick={this.editUser}>
               Edit
             </button>
