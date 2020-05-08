@@ -47,6 +47,22 @@ router.get("/student/:username", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// GET individual student data for Individual Behavior page
+router.get("/studentInfo/:username", rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT * FROM "student"
+  WHERE "student".username = $1;`;
+  pool
+    .query(queryText, [req.params.username])
+    .then((result) => {
+      console.log(result.rows);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET student query", err);
+      res.sendStatus(500);
+    });
+});
+
 // GET staff list data
 router.get("/staffList", rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT "staff".id, "staff".staff_name, "staff".position, "staff".username FROM "staff";`;

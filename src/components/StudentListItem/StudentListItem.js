@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class StudentListItem extends Component {
@@ -11,14 +12,24 @@ class StudentListItem extends Component {
     });
   };
 
+  studentBehavior = () => {
+    console.log("In studentBehavior Click", this.props.userItem);
+    this.props.dispatch({
+      type: "FETCH_STUDENT_INFO_FOR_BEHAVIOR",
+      payload: this.props.userItem,
+    });
+
+    this.props.history.push("/individualBehavior");
+  };
+
   render() {
     return (
       <li className="user_list">
-        <h2>{this.props.userItem.name}</h2>
+        <h2 onClick={this.studentBehavior}>{this.props.userItem.name}</h2>
         <button onClick={this.deleteClick}>Delete Student</button>
       </li>
     );
   }
 }
 
-export default connect(mapStoreToProps)(StudentListItem);
+export default withRouter(connect(mapStoreToProps)(StudentListItem));

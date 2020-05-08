@@ -58,6 +58,22 @@ function* fetchStudent(action) {
   }
 }
 
+// Used to get the student's information for the Behavior form
+// This is separate from fetchStudent because it sets the student info away from the
+// staff info which is still held in the user reducer
+function* fetchStudentInfo(action) {
+  try {
+    const thisUser = action.payload;
+    const pageText = `/api/user/studentInfo/${thisUser.username}`;
+    const response = yield axios.get(pageText);
+    console.log("in saga", response.data[0]);
+
+    yield put({ type: "SET_STUDENT_INFO", payload: response.data[0] });
+  } catch (error) {
+    console.log("Student Info GET request failed", error);
+  }
+}
+
 //Used to update staff
 function* updateStaff(action) {
   try {
@@ -82,6 +98,7 @@ function* userSaga() {
   yield takeLatest("FETCH_STUDENT", fetchStudent);
   yield takeLatest("UPDATE_STAFF", updateStaff);
   yield takeLatest("UPDATE_STUDENT", updateStudent);
+  yield takeLatest("FETCH_STUDENT_INFO_FOR_BEHAVIOR", fetchStudentInfo);
 }
 
 export default userSaga;

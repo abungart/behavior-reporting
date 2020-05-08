@@ -4,6 +4,7 @@ import loginMode from "./loginMode.reducer";
 import user from "./user.reducer";
 import currentUserData from "./currentUserData.reducer";
 import userList from "./userList.reducer";
+import studentInfo from "./studentInfo.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   currentUserData, // stores the data for the current user
   userList, // stores list of users for current view
+  studentInfo, // stores student info separate from the staff info for the IndividualBehavior page
 });
 
 export default rootReducer;
