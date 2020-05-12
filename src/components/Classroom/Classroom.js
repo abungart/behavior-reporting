@@ -20,6 +20,10 @@ class Classroom extends Component {
     heading: "Classroom Page!",
   };
 
+  startIntervention = () => {
+    console.log("Start Intervention");
+  };
+
   render() {
     return (
       <div>
@@ -40,6 +44,9 @@ class Classroom extends Component {
                 <InterventionStart key={userItem.id} userItem={userItem} />
               );
             })}
+            <button type="button" onClick={this.startIntervention}>
+              Start Daily Interventions
+            </button>
           </ul>
         </div>
         <LogOutButton className="log-in" />
