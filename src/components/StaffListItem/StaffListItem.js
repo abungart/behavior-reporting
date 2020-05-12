@@ -9,6 +9,9 @@ class ListItem extends Component {
       type: "DELETE_STAFF",
       payload: `/api/user/deleteStaff/${this.props.userItem.username}`,
     });
+    this.props.dispatch({
+      type: "GET_STAFF_LIST",
+    });
   };
 
   render() {

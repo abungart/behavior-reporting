@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
   Switch,
+  Link,
 } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -22,6 +23,8 @@ import LoginPage from "../LoginPage/LoginPage";
 import StaffRegister from "../StaffRegistration/StaffRegistration";
 import StudentRegister from "../StudentRegistration/StudentRegistration";
 import IndividualBehavior from "../IndividualBehavior/IndividualBehavior";
+import Classroom from "../Classroom/Classroom";
+import School from "../School/School";
 
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
@@ -41,7 +44,6 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
             <Route exact path="/home" component={LandingPage} />
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -52,6 +54,8 @@ class App extends Component {
             <ProtectedRoute exact path="/teacher" component={TeacherPage} />
             <ProtectedRoute exact path="/specials" component={SpecialsPage} />
             <ProtectedRoute exact path="/student" component={StudentPage} />
+            <ProtectedRoute exact path="/classroom" component={Classroom} />
+            <ProtectedRoute exact path="/school" component={School} />
             <ProtectedRoute
               exact
               path="/individualBehavior"

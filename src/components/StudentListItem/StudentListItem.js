@@ -10,6 +10,10 @@ class StudentListItem extends Component {
       type: "DELETE_STUDENT",
       payload: `/api/user/delete/${this.props.userItem.username}`,
     });
+    this.props.dispatch({
+      type: "GET_STUDENT_LIST",
+      payload: this.props.store.user,
+    });
   };
 
   studentBehavior = () => {
