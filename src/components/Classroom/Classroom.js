@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import StudentListItem from "../StudentListItem/StudentListItem";
+import InterventionStart from "../InterventionStart/InterventionStart";
 
 class Classroom extends Component {
   componentDidMount() {
@@ -28,6 +29,16 @@ class Classroom extends Component {
           <ul>
             {this.props.store.userList.map((userItem) => {
               return <StudentListItem key={userItem.id} userItem={userItem} />;
+            })}
+          </ul>
+        </div>
+        <div>
+          <h1>Intervention List</h1>
+          <ul>
+            {this.props.store.userList.map((userItem) => {
+              return (
+                <InterventionStart key={userItem.id} userItem={userItem} />
+              );
             })}
           </ul>
         </div>
