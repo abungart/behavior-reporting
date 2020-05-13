@@ -10,12 +10,14 @@ class IndividualBehavior extends Component {
 
   state = {
     heading: "Individual Behavior Page!",
+    pointGoal: 0,
   };
 
   interventionSwitch = () => {
     let interventionToggle = {
       user: this.props.store.studentInfo.username,
       toggle: this.props.store.studentInfo.in_intervention,
+      points: this.state.pointGoal,
     };
     console.log("in intervention toggle", interventionToggle);
     if (this.props.store.studentInfo.in_intervention === false) {
@@ -24,9 +26,17 @@ class IndividualBehavior extends Component {
       interventionToggle.toggle = false;
     }
     console.log("Intervention Toggle info:", interventionToggle);
+
     this.props.dispatch({
       type: "INTERVENTION_TOGGLE",
       payload: interventionToggle,
+    });
+  }; // end InterventionSwitch
+
+  // Text Input Handler
+  handlePointsChange = (event) => {
+    this.setState({
+      pointGoal: event.target.value,
     });
   };
 
@@ -38,9 +48,17 @@ class IndividualBehavior extends Component {
         <div>
           <h2>Start Intervention</h2>
           {this.props.store.studentInfo.in_intervention === false && (
-            <button type="button" onClick={this.interventionSwitch}>
-              Start Intervention
-            </button>
+            <div>
+              <label>Points Goal</label>
+              <input
+                type="int"
+                placeholder="0"
+                onChange={this.handlePointsChange}
+              />
+              <button type="button" onClick={this.interventionSwitch}>
+                Start Intervention
+              </button>
+            </div>
           )}
           {this.props.store.studentInfo.in_intervention === true && (
             <button type="button" onClick={this.interventionSwitch}>

@@ -12,8 +12,8 @@ const router = express.Router();
 router.put("/interventionToggle", (req, res) => {
   const userToggle = req.body;
   console.log("In PUT:", userToggle);
-  const queryText = `UPDATE "student" SET "in_intervention" = $1 WHERE "username" = $2;`;
-  const queryValues = [userToggle.toggle, userToggle.user];
+  const queryText = `UPDATE "student" SET "in_intervention" = $1, "point_goal" = $2 WHERE "username" = $3;`;
+  const queryValues = [userToggle.toggle, userToggle.points, userToggle.user];
 
   pool
     .query(queryText, queryValues)

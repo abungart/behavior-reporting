@@ -8,8 +8,6 @@ import InterventionStart from "../InterventionStart/InterventionStart";
 
 class Classroom extends Component {
   componentDidMount() {
-    console.log("Classroom Mounted", this.props.store.user);
-
     this.props.dispatch({
       type: "GET_STUDENT_LIST",
       payload: this.props.store.user,
