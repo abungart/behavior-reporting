@@ -5,16 +5,17 @@ import StudentData from "../StudentData/StudentData";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+const moment = require("moment");
 
 const hour = [
-  { value: "8am to 9am", label: "8" },
-  { value: "9am to 10am", label: "9" },
-  { value: "10am to 11am", label: "10" },
-  { value: "11am to 12pm", label: "11" },
-  { value: "12pm to 1pm", label: "12" },
-  { value: "1pm to 2pm", label: "1" },
-  { value: "2pm to 3pm", label: "2" },
-  { value: "3pm to 4pm", label: "3" },
+  { value: "8", label: "8am to 9am" },
+  { value: "9", label: "9am to 10am" },
+  { value: "10", label: "10am to 11am" },
+  { value: "11", label: "11am to 12pm" },
+  { value: "12", label: "12pm to 1pm" },
+  { value: "1", label: "1pm to 2pm" },
+  { value: "2", label: "2pm to 3pm" },
+  { value: "3", label: "3pm to 4pm" },
 ];
 
 class IndividualBehavior extends Component {
@@ -52,6 +53,9 @@ class IndividualBehavior extends Component {
 
   submitHourlyIntervention = () => {
     console.log("In Hourly Submit", this.state);
+    let date = this.state.date;
+    date = moment(date).format("YYYY-MM-DD");
+    console.log("date", date);
   };
 
   // Text Input Handler
@@ -109,6 +113,7 @@ class IndividualBehavior extends Component {
               </div>
               <div>
                 <DatePicker
+                  dateFormat="yyyy/MM/dd"
                   selected={this.state.date}
                   onChange={this.handleDateChange}
                 />
