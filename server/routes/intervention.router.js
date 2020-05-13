@@ -25,4 +25,22 @@ router.put("/interventionToggle", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+// Start Daily Intervention For Class
+router.post("/startDaily", (req, res) => {
+  const userInfo = req.body;
+  const queryText = `INSERT INTO "intervention"
+    ("student_id", "daily_goal") VALUES ($1, $2);`;
+  const queryValues = [userInfo.id, userInfo.point_goal];
+
+  pool
+    .query(queryText, queryValues)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log("Error in POST startDaily", err);
+      res.sendStatus(500);
+    });
+});
 module.exports = router;
