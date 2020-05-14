@@ -22,9 +22,18 @@ function* startDailyIntervention(action) {
   }
 }
 
+function* startHourlyIntervention(action) {
+  try {
+    yield axios.put("/api/intervention/hourlyUpdate", action.payload);
+  } catch (err) {
+    console.log("Error with startHourlyIntervention", err);
+  }
+}
+
 function* userListSaga() {
   yield takeLatest("INTERVENTION_TOGGLE", interventionToggle);
   yield takeLatest("START_DAILY_INTERVENTION", startDailyIntervention);
+  yield takeLatest("SUBMIT_HOURLY_INTERVENTION", startHourlyIntervention);
 }
 
 export default userListSaga;

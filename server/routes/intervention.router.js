@@ -43,4 +43,45 @@ router.post("/startDaily", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+// Hourly Update for Student's Intervention
+router.put("/hourlyUpdate", (req, res) => {
+  const update = req.body;
+  let queryText = "";
+  if (update.hour == "8") {
+    queryText = `UPDATE "intervention" SET "8_points" = $1, "8_notes" = $2, "8_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  } else if (update.hour == "9") {
+    queryText = `UPDATE "intervention" SET "9_points" = $1, "9_notes" = $2, "9_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  } else if (update.hour == "10") {
+    queryText = `UPDATE "intervention" SET "10_points" = $1, "10_notes" = $2, "10_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  } else if (update.hour == "11") {
+    queryText = `UPDATE "intervention" SET "11_points" = $1, "11_notes" = $2, "11_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  } else if (update.hour == "12") {
+    queryText = `UPDATE "intervention" SET "12_points" = $1, "12_notes" = $2, "12_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  } else if (update.hour == "1") {
+    queryText = `UPDATE "intervention" SET "1_points" = $1, "1_notes" = $2, "1_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  } else if (update.hour == "2") {
+    queryText = `UPDATE "intervention" SET "2_points" = $1, "2_notes" = $2, "2_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  } else if (update.hour == "3") {
+    queryText = `UPDATE "intervention" SET "3_points" = $1, "3_notes" = $2, "3_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  }
+
+  const queryValues = [
+    update.points,
+    update.notes,
+    update.teacher,
+    update.student,
+    update.date,
+  ];
+  pool
+    .query(queryText, queryValues)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error completing PUT hourlyUpdate", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

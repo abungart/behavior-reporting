@@ -52,10 +52,19 @@ class IndividualBehavior extends Component {
   }; // end InterventionSwitch
 
   submitHourlyIntervention = () => {
-    console.log("In Hourly Submit", this.state);
-    let date = this.state.date;
-    date = moment(date).format("YYYY-MM-DD");
-    console.log("date", date);
+    let submission = {
+      date: moment(this.state.date).format("YYYY-MM-DD"),
+      points: this.state.pointGoal,
+      notes: this.state.notes,
+      hour: this.state.hour,
+      teacher: this.props.store.user.id,
+      student: this.props.store.studentInfo.id,
+    };
+    console.log("submission", submission);
+    this.props.dispatch({
+      type: "SUBMIT_HOURLY_INTERVENTION",
+      payload: submission,
+    });
   };
 
   // Text Input Handler
