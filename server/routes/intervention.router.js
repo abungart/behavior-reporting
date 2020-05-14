@@ -47,24 +47,8 @@ router.post("/startDaily", (req, res) => {
 // Hourly Update for Student's Intervention
 router.put("/hourlyUpdate", (req, res) => {
   const update = req.body;
-  let queryText = "";
-  if (update.hour == "8") {
-    queryText = `UPDATE "intervention" SET "8_points" = $1, "8_notes" = $2, "8_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  } else if (update.hour == "9") {
-    queryText = `UPDATE "intervention" SET "9_points" = $1, "9_notes" = $2, "9_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  } else if (update.hour == "10") {
-    queryText = `UPDATE "intervention" SET "10_points" = $1, "10_notes" = $2, "10_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  } else if (update.hour == "11") {
-    queryText = `UPDATE "intervention" SET "11_points" = $1, "11_notes" = $2, "11_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  } else if (update.hour == "12") {
-    queryText = `UPDATE "intervention" SET "12_points" = $1, "12_notes" = $2, "12_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  } else if (update.hour == "1") {
-    queryText = `UPDATE "intervention" SET "1_points" = $1, "1_notes" = $2, "1_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  } else if (update.hour == "2") {
-    queryText = `UPDATE "intervention" SET "2_points" = $1, "2_notes" = $2, "2_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  } else if (update.hour == "3") {
-    queryText = `UPDATE "intervention" SET "3_points" = $1, "3_notes" = $2, "3_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
-  }
+
+  let queryText = `UPDATE "intervention" SET "${update.hour}_points" = $1, "${update.hour}_notes" = $2, "${update.hour}_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
 
   const queryValues = [
     update.points,
@@ -97,6 +81,49 @@ router.get("/studentDaily", (req, res) => {
     })
     .catch((err) => {
       console.log("Error completing GET studentDaily", err);
+      res.sendStatus(500);
+    });
+});
+
+// GET individual student's scores in total
+router.get("/studentInterventions/:id", (req, res) => {
+  const queryText = `SELECT * FROM "intervention" WHERE "student_id" = $1;`;
+  pool
+    .query(queryText, [req.params.id])
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET studentInterventions", err);
+      res.sendStatus(500);
+    });
+});
+
+// GET teacher's total scores
+router.get("/teacherIntervention/:id", (req, res) => {
+  const queryText = `SELECT * FROM "intervention" WHERE 
+    "8_teacher" = $1 OR "9_teacher" = $1 OR "10_teacher" = $1 OR "11_teacher" = $1 OR "12_teacher" = $1 OR "1_teacher" = $1 OR "2_teacher" = $1 OR "3_teacher" = $1;`;
+  pool
+    .query(queryText, [req.params.id])
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET teacherInterventions", err);
+      res.sendStatus(500);
+    });
+});
+
+// GET school total scores
+router.get("/schoolInterventions", (req, res) => {
+  const queryText = `SELECT * FROM "intervention";`;
+  pool
+    .query(queryText)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET schoolInterventions", err);
       res.sendStatus(500);
     });
 });
