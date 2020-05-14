@@ -84,4 +84,21 @@ router.put("/hourlyUpdate", (req, res) => {
     });
 });
 
+//GET ROUTES
+// GET individual student's scores for one day.
+router.get("/studentDaily", (req, res) => {
+  const searchInfo = req.body;
+  const queryText = `SELECT * FROM "intervention" WHERE "student_id" = $1 AND "date" = $2;`;
+  const queryValues = [searchInfo.student, searchInfo.date];
+  pool
+    .query(queryText, queryValues)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET studentDaily", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

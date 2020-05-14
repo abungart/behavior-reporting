@@ -5,6 +5,8 @@ import user from "./user.reducer";
 import currentUserData from "./currentUserData.reducer";
 import userList from "./userList.reducer";
 import studentInfo from "./studentInfo.reducer";
+import intervention from "./intervention.reducer";
+import interventionTimePeriod from "./interventionTimePeriod.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
   currentUserData, // stores the data for the current user
   userList, // stores list of users for current view
   studentInfo, // stores student info separate from the staff info for the IndividualBehavior page
+  intervention, // stores intervention data for reporting
+  interventionTimePeriod, // stored intervention data from weeks, months, or in total
 });
 
 export default rootReducer;

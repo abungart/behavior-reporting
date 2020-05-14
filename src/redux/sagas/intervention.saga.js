@@ -14,6 +14,7 @@ function* interventionToggle(action) {
   }
 }
 
+// Intervention Inputs
 function* startDailyIntervention(action) {
   try {
     yield axios.post("api/intervention/startDaily", action.payload);
@@ -30,10 +31,25 @@ function* startHourlyIntervention(action) {
   }
 }
 
+// GET REQUESTS FOR INTERVENTIONS
+// GET single day intervention for student
+function* getDailyIntervention(action) {
+  try {
+    const response = yield axios.get(
+      "/api/intervention/studentDaily",
+      action.payload
+    );
+    yield put({ type: "SET_STUDENT_DAY_INTERVENTION", payload: response.data });
+  } catch (err) {
+    console.log("Error with getDailyIntervention", err);
+  }
+}
+
 function* userListSaga() {
   yield takeLatest("INTERVENTION_TOGGLE", interventionToggle);
   yield takeLatest("START_DAILY_INTERVENTION", startDailyIntervention);
   yield takeLatest("SUBMIT_HOURLY_INTERVENTION", startHourlyIntervention);
+  yield takeLatest("DAILY_INTERVENTION", getDailyIntervention);
 }
 
 export default userListSaga;

@@ -31,6 +31,7 @@ class IndividualBehavior extends Component {
     hour: "",
   };
 
+  // Button handlers
   interventionSwitch = () => {
     let interventionToggle = {
       user: this.props.store.studentInfo.username,
@@ -64,6 +65,17 @@ class IndividualBehavior extends Component {
     this.props.dispatch({
       type: "SUBMIT_HOURLY_INTERVENTION",
       payload: submission,
+    });
+  };
+
+  getIntervention = () => {
+    let interventionCriteria = {
+      date: moment(this.state.date).format("YYYY-MM-DD"),
+      student: this.props.store.studentInfo.id,
+    };
+    this.props.dispatch({
+      type: "DAILY_INTERVENTION",
+      payload: interventionCriteria,
     });
   };
 
@@ -149,6 +161,17 @@ class IndividualBehavior extends Component {
               </div>
             </div>
           )}
+        </div>
+        <div>
+          <h1>Daily Intervention Reports</h1>
+          <DatePicker
+            dateFormat="yyyy/MM/dd"
+            selected={this.state.date}
+            onChange={this.handleDateChange}
+          />
+          <button type="button" onClick={this.getIntervention}>
+            Get Daily Report
+          </button>
         </div>
       </div>
     );
