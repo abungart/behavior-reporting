@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import StudentData from "../StudentData/StudentData";
+import DailyInterventionOutput from "../DailyInterventionOutput/DailyInterventionOutput";
+const moment = require("moment");
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -19,6 +23,25 @@ class Student extends Component {
 
   state = {
     heading: "Student Page!",
+    date: new Date(),
+  };
+
+  getIntervention = () => {
+    let interventionCriteria = {
+      date: moment(this.state.date).format("YYYY-MM-DD"),
+      student: this.props.store.studentInfo.id,
+    };
+    console.log("Intervention Criteria", interventionCriteria);
+    this.props.dispatch({
+      type: "DAILY_INTERVENTION",
+      payload: interventionCriteria,
+    });
+  };
+
+  handleDateChange = (date) => {
+    this.setState({
+      date: date,
+    });
   };
 
   render() {
@@ -26,6 +49,18 @@ class Student extends Component {
       <div>
         <h2>{this.state.heading}</h2>
         <StudentData />
+        <div>
+          <h1>Daily Intervention Reports</h1>
+          <DatePicker
+            dateFormat="yyyy/MM/dd"
+            selected={this.state.date}
+            onChange={this.handleDateChange}
+          />
+          <button type="button" onClick={this.getIntervention}>
+            Get Daily Report
+          </button>
+        </div>
+        <DailyInterventionOutput />
         <LogOutButton className="log-in" />
       </div>
     );

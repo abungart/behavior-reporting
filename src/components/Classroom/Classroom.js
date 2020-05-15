@@ -6,6 +6,8 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import StudentListItem from "../StudentListItem/StudentListItem";
 import InterventionStart from "../InterventionStart/InterventionStart";
 
+import "./Classroom.css";
+
 class Classroom extends Component {
   componentDidMount() {
     if (this.props.store.user.role == "teacher") {
