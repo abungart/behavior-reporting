@@ -51,6 +51,8 @@ class IndividualBehavior extends Component {
       type: "INTERVENTION_TOGGLE",
       payload: interventionToggle,
     });
+
+    this.props.history.push("/classroom");
   }; // end InterventionSwitch
 
   submitHourlyIntervention = () => {

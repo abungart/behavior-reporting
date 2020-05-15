@@ -66,11 +66,22 @@ function* fetchStudentInfo(action) {
     const thisUser = action.payload;
     const pageText = `/api/user/studentInfo/${thisUser.username}`;
     const response = yield axios.get(pageText);
-    console.log("in saga", response.data[0]);
 
     yield put({ type: "SET_STUDENT_INFO", payload: response.data[0] });
   } catch (error) {
     console.log("Student Info GET request failed", error);
+  }
+}
+
+function* fetchStaffInfo(action) {
+  try {
+    const thisUser = action.payload;
+    const pageText = `/api/user/staffInfo/${thisUser.username}`;
+    const response = yield axios.get(pageText);
+
+    yield put({ type: "SET_STAFF_INFO", payload: response.data[0] });
+  } catch (error) {
+    console.log("Staff Info GET request failed", error);
   }
 }
 
@@ -101,6 +112,7 @@ function* userSaga() {
   yield takeLatest("UPDATE_STAFF", updateStaff);
   yield takeLatest("UPDATE_STUDENT", updateStudent);
   yield takeLatest("FETCH_STUDENT_SEPARATE", fetchStudentInfo);
+  yield takeLatest("FETCH_STAFF_SEPARATE", fetchStaffInfo);
 }
 
 export default userSaga;

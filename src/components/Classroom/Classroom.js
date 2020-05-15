@@ -8,14 +8,20 @@ import InterventionStart from "../InterventionStart/InterventionStart";
 
 class Classroom extends Component {
   componentDidMount() {
-    this.props.dispatch({
-      type: "SET_USER_INFO",
-      payload: this.props.store.user.id,
-    });
-    this.props.dispatch({
-      type: "GET_STUDENT_LIST",
-      payload: this.props.store.user,
-    });
+    if (this.props.store.user.role == "teacher") {
+      this.props.dispatch({
+        type: "GET_STUDENT_LIST",
+        payload: this.props.store.user,
+      });
+    } else if (
+      this.props.store.user.role == "admin" ||
+      this.props.store.user.role == "specials"
+    ) {
+      this.props.dispatch({
+        type: "GET_STUDENT_LIST",
+        payload: this.props.store.currentUserData,
+      });
+    }
   }
 
   state = {
