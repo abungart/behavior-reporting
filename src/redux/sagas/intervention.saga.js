@@ -35,10 +35,11 @@ function* startHourlyIntervention(action) {
 // GET single day intervention for student
 function* getDailyIntervention(action) {
   try {
+    const thisStudent = action.payload;
     const response = yield axios.get(
-      "/api/intervention/studentDaily",
-      action.payload
+      `/api/intervention/studentDaily?name=${thisStudent.student}&date=${thisStudent.date}`
     );
+    console.log("RESPONSE", response.data);
     yield put({ type: "SET_STUDENT_DAY_INTERVENTION", payload: response.data });
   } catch (err) {
     console.log("Error with getDailyIntervention", err);
@@ -50,7 +51,7 @@ function* getStudentInterventions(action) {
   try {
     const thisStudent = action.payload;
     const response = yield axios.get(
-      `/api/intervention/studentInterventions/${thisStudent.id}`
+      `/api/intervention/studentInterventions/${thisStudent.student}`
     );
     yield put({ type: "SET_PERIOD_INTERVENTION", payload: response.data });
   } catch (err) {

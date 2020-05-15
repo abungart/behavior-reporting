@@ -4,11 +4,16 @@ import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class StudentListItem extends Component {
+  state = {
+    deleteUsername: this.props.userItem.username,
+    id: this.props.store.currentUserData.id,
+  };
+
   deleteClick = () => {
     console.log("In Delete Button", this.props.userItem.username);
     this.props.dispatch({
       type: "DELETE_STUDENT",
-      payload: `/api/user/delete/${this.props.userItem.username}`,
+      payload: this.state,
     });
     this.props.dispatch({
       type: "GET_STUDENT_LIST",

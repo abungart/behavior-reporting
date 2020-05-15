@@ -78,6 +78,7 @@ function* fetchStudentInfo(action) {
 function* updateStaff(action) {
   try {
     yield axios.put("/api/user/editStaff", action.payload);
+    yield put({ type: "FETCH_STAFF", payload: action.payload });
   } catch (err) {
     console.log("Error with editStaff", err);
   }
@@ -87,6 +88,7 @@ function* updateStaff(action) {
 function* updateStudent(action) {
   try {
     yield axios.put("/api/user/editStudent", action.payload);
+    yield put({ type: "FETCH_STUDENT", payload: action.payload });
   } catch (err) {
     console.log("Error with editStudent", err);
   }

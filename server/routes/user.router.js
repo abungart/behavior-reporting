@@ -65,7 +65,8 @@ router.get("/studentInfo/:username", rejectUnauthenticated, (req, res) => {
 
 // GET staff list data
 router.get("/staffList", rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT "staff".id, "staff".staff_name, "staff".position, "staff".username FROM "staff";`;
+  const queryText = `SELECT "staff".id, "staff".staff_name, "staff".position, "staff".username 
+  FROM "staff" ORDER BY "staff".staff_name ASC;`;
   pool
     .query(queryText)
     .then((result) => {
@@ -82,7 +83,7 @@ router.get("/staffList", rejectUnauthenticated, (req, res) => {
 router.get("/studentList/:id", rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT "student".id, "student".name, "student".username, "student".in_intervention, "student".point_goal FROM "student"
   JOIN "user" ON "student".teacher_id = "user".id
-  WHERE "student".teacher_id = $1;`;
+  WHERE "student".teacher_id = $1 ORDER BY "student".name ASC;`;
   pool
     .query(queryText, [req.params.id])
     .then((result) => {
@@ -90,7 +91,7 @@ router.get("/studentList/:id", rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch((err) => {
-      console.log("Error completing GET staff list query", err);
+      console.log("Error completing GET student list query", err);
       res.sendStatus(500);
     });
 });

@@ -9,6 +9,10 @@ import InterventionStart from "../InterventionStart/InterventionStart";
 class Classroom extends Component {
   componentDidMount() {
     this.props.dispatch({
+      type: "SET_USER_INFO",
+      payload: this.props.store.user.id,
+    });
+    this.props.dispatch({
       type: "GET_STUDENT_LIST",
       payload: this.props.store.user,
     });
@@ -51,10 +55,10 @@ class Classroom extends Component {
                 <InterventionStart key={userItem.id} userItem={userItem} />
               );
             })}
-            <button type="button" onClick={this.startIntervention}>
-              Start Daily Interventions
-            </button>
           </ul>
+          <button type="button" onClick={this.startIntervention}>
+            Start Daily Interventions
+          </button>
         </div>
         <LogOutButton className="log-in" />
       </div>

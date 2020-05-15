@@ -71,12 +71,13 @@ router.put("/hourlyUpdate", (req, res) => {
 //GET ROUTES
 // GET individual student's scores for one day.
 router.get("/studentDaily", (req, res) => {
-  const searchInfo = req.body;
+  const searchInfo = req.query;
   const queryText = `SELECT * FROM "intervention" WHERE "student_id" = $1 AND "date" = $2;`;
-  const queryValues = [searchInfo.student, searchInfo.date];
+  const queryValues = [searchInfo.name, searchInfo.date];
   pool
     .query(queryText, queryValues)
     .then((result) => {
+      console.log("RESULT:", result);
       res.send(result.rows);
     })
     .catch((err) => {
@@ -87,6 +88,7 @@ router.get("/studentDaily", (req, res) => {
 
 // GET individual student's scores in total
 router.get("/studentInterventions/:id", (req, res) => {
+  console.log("StudentPeriod", req.params.id);
   const queryText = `SELECT * FROM "intervention" WHERE "student_id" = $1;`;
   pool
     .query(queryText, [req.params.id])

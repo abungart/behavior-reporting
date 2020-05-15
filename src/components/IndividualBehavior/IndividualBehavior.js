@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import StudentData from "../StudentData/StudentData";
+import DailyInterventionOutput from "../DailyInterventionOutput/DailyInterventionOutput";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -73,6 +74,7 @@ class IndividualBehavior extends Component {
       date: moment(this.state.date).format("YYYY-MM-DD"),
       student: this.props.store.studentInfo.id,
     };
+    console.log("Intervention Criteria", interventionCriteria);
     this.props.dispatch({
       type: "DAILY_INTERVENTION",
       payload: interventionCriteria,
@@ -173,6 +175,7 @@ class IndividualBehavior extends Component {
             Get Daily Report
           </button>
         </div>
+        <DailyInterventionOutput />
       </div>
     );
   }

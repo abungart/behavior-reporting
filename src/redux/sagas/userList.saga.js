@@ -32,8 +32,9 @@ function* getStudentList(action) {
 // Delete Individual student from list
 function* deleteStudent(action) {
   try {
-    yield axios.delete(action.payload);
-    // yield put({ type: "GET_STUDENT_LIST"}); REFRESH THE PAGE
+    const queryInfo = action.payload;
+    yield axios.delete(`/api/user/delete/${queryInfo.deleteUsername}`);
+    yield put({ type: "GET_STUDENT_LIST", payload: queryInfo });
   } catch (err) {
     console.log("Error with deleteStudent", err);
   }
@@ -43,7 +44,7 @@ function* deleteStudent(action) {
 function* deleteStaff(action) {
   try {
     yield axios.delete(action.payload);
-    // yield put({ type: "GET_STAFF_LIST"}); REFRESH THE PAGE
+    yield put({ type: "GET_STAFF_LIST" });
   } catch (err) {
     console.log("Error with deleteStudent", err);
   }
