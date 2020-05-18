@@ -45,6 +45,14 @@ const Nav = (props) => {
           {loginLinkData.text}
         </Link>
         {/* Conditional rendering for the NAV bar to show Logout, Register Students, and Register Staff*/}
+        {(props.store.user.role === "admin" ||
+          props.store.user.role === "specials") && (
+          <>
+            <Link className="nav-link" to="/school">
+              School
+            </Link>
+          </>
+        )}
         {props.store.user.role === "admin" && (
           <>
             <Link className="nav-link" to="/staffRegister">

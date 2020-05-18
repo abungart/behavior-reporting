@@ -87,7 +87,7 @@ class StudentData extends Component {
         {this.state.inEdit === false && (
           <div>
             <p>{this.props.store.studentInfo.name}</p>
-            <p>{this.props.store.studentInfo.nickname}</p>
+            <p>Nickname: {this.props.store.studentInfo.nickname}</p>
             <p>Email Address: {this.props.store.studentInfo.email_address}</p>
             <p>Home Phone: {this.props.store.studentInfo.home_phone}</p>
             <p>Cell Phone: {this.props.store.studentInfo.cell_phone}</p>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import "./DailyIntervention.css";
 const moment = require("moment");
 
 class DailyInterventionOutput extends Component {
@@ -15,7 +16,7 @@ class DailyInterventionOutput extends Component {
               Intervention for the day of <> </>
               {moment(interventionData.date).format("MM-DD-YYYY")}
             </h3>
-            <table>
+            <table className="intervention_table">
               <thead>
                 <tr>
                   <th>Time</th>
