@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import StaffListItem from "../StaffListItem/StaffListItem";
+import Grid from "@material-ui/core/Grid";
 
 class School extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class School extends Component {
   }
 
   state = {
-    heading: "School Page!",
+    heading: "My School",
   };
 
   render() {
@@ -23,13 +24,19 @@ class School extends Component {
       <div>
         <h2>"{this.state.heading}"</h2>
 
-        <div>
+        <Grid
+          container
+          spacing={2}
+          justify="center"
+          direction="row"
+          alignContent="center"
+        >
           <ul>
             {this.props.store.userList.map((userItem) => {
               return <StaffListItem key={userItem.id} userItem={userItem} />;
             })}
           </ul>
-        </div>
+        </Grid>
         <LogOutButton className="log-in" />
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import Button from "@material-ui/core/Button";
 
 class StudentData extends Component {
   state = {
@@ -91,9 +92,15 @@ class StudentData extends Component {
             <p>Home Phone: {this.props.store.studentInfo.home_phone}</p>
             <p>Cell Phone: {this.props.store.studentInfo.cell_phone}</p>
             <p>Work Phone: {this.props.store.studentInfo.work_phone}</p>
-            <button type="button" onClick={this.editUser}>
+            <Button
+              type="button"
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={this.editUser}
+            >
               Edit
-            </button>
+            </Button>
           </div>
         )}
         {this.state.inEdit === true && (
@@ -164,12 +171,24 @@ class StudentData extends Component {
                 />
               </label>
             </div>
-            <button type="button" onClick={this.submitEdit}>
+            <Button
+              type="button"
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={this.submitEdit}
+            >
               Submit
-            </button>
-            <button type="button" onClick={this.cancelEdit}>
+            </Button>
+            <Button
+              type="button"
+              size="small"
+              variant="contained"
+              color="secondary"
+              onClick={this.cancelEdit}
+            >
               Cancel
-            </button>
+            </Button>
           </div>
         )}
       </div>

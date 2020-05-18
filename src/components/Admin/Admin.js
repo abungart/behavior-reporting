@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import Button from "@material-ui/core/Button";
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -21,7 +22,6 @@ class Admin extends Component {
   }
 
   state = {
-    heading: "Admin Page!",
     inEdit: false,
     staff_name: "",
     email_address: "",
@@ -83,7 +83,6 @@ class Admin extends Component {
   render() {
     return (
       <div>
-        <h2>"{this.state.heading}"</h2>
         {this.state.inEdit === false && (
           <div>
             <p>{this.props.store.currentUserData.staff_name}</p>
@@ -91,9 +90,15 @@ class Admin extends Component {
               Email Address: {this.props.store.currentUserData.email_address}
             </p>
             <p>Position: {this.props.store.currentUserData.position}</p>
-            <button type="button" onClick={this.editUser}>
+            <Button
+              type="button"
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={this.editUser}
+            >
               Edit
-            </button>
+            </Button>
           </div>
         )}
         {this.state.inEdit === true && (
@@ -131,12 +136,24 @@ class Admin extends Component {
                 />
               </label>
             </div>
-            <button type="button" onClick={this.submitEdit}>
+            <Button
+              type="button"
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={this.submitEdit}
+            >
               Submit
-            </button>
-            <button type="button" onClick={this.cancelEdit}>
+            </Button>
+            <Button
+              type="button"
+              size="small"
+              variant="contained"
+              color="secondary"
+              onClick={this.cancelEdit}
+            >
               Cancel
-            </button>
+            </Button>
           </div>
         )}
         <Link to="/school">

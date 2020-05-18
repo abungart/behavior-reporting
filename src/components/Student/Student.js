@@ -22,7 +22,6 @@ class Student extends Component {
   }
 
   state = {
-    heading: "Student Page!",
     date: new Date(),
   };
 
@@ -47,7 +46,6 @@ class Student extends Component {
   render() {
     return (
       <div>
-        <h2>{this.state.heading}</h2>
         <StudentData />
         <div>
           <h1>Daily Intervention Reports</h1>

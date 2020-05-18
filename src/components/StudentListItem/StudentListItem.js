@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
+import Button from "@material-ui/core/Button";
+
 class StudentListItem extends Component {
   state = {
     deleteUsername: this.props.userItem.username,
@@ -34,8 +36,18 @@ class StudentListItem extends Component {
   render() {
     return (
       <li className="user_list">
-        <h2 onClick={this.studentBehavior}>{this.props.userItem.name}</h2>
-        <button onClick={this.deleteClick}>Delete Student</button>
+        <h2 onClick={this.studentBehavior}>
+          {this.props.userItem.name}
+          <> </>
+          <Button
+            color="secondary"
+            variant="contained"
+            size="small"
+            onClick={this.deleteClick}
+          >
+            Delete Student
+          </Button>
+        </h2>
       </li>
     );
   }

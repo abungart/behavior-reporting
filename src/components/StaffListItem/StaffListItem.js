@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import { withRouter } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 class ListItem extends Component {
   deleteClick = () => {
@@ -27,10 +28,20 @@ class ListItem extends Component {
   render() {
     return (
       <li className="user_list">
-        <h2 onClick={this.chooseStaff}>{this.props.userItem.staff_name}</h2>
-        {this.props.store.user.role === "admin" && (
-          <button onClick={this.deleteClick}>Delete Staff</button>
-        )}
+        <h2 onClick={this.chooseStaff}>
+          {this.props.userItem.staff_name}
+          <> </>
+          {this.props.store.user.role === "admin" && (
+            <Button
+              size="medium"
+              variant="contained"
+              color="secondary"
+              onClick={this.deleteClick}
+            >
+              Delete Staff
+            </Button>
+          )}
+        </h2>
       </li>
     );
   }

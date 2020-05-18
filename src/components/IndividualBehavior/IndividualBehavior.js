@@ -5,6 +5,7 @@ import StudentData from "../StudentData/StudentData";
 import DailyInterventionOutput from "../DailyInterventionOutput/DailyInterventionOutput";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
+import Button from "@material-ui/core/Button";
 import "react-datepicker/dist/react-datepicker.css";
 const moment = require("moment");
 
@@ -124,17 +125,27 @@ class IndividualBehavior extends Component {
                 placeholder="0"
                 onChange={this.handlePointsChange}
               />
-              <button type="button" onClick={this.interventionSwitch}>
+              <Button
+                size="medium"
+                variant="contained"
+                color="primary"
+                onClick={this.interventionSwitch}
+              >
                 Start Intervention
-              </button>
+              </Button>
             </div>
           )}
           {this.props.store.studentInfo.in_intervention === true && (
             <div>
               <div>
-                <button type="button" onClick={this.interventionSwitch}>
+                <Button
+                  size="medium"
+                  variant="contained"
+                  color="secondary"
+                  onClick={this.interventionSwitch}
+                >
                   Stop Intervention
-                </button>
+                </Button>
               </div>
               <div>
                 <DatePicker
@@ -159,9 +170,15 @@ class IndividualBehavior extends Component {
                   placeholder="Notes"
                   onChange={this.handleNotesChange}
                 />
-                <button type="button" onClick={this.submitHourlyIntervention}>
+                <Button
+                  type="button"
+                  size="medium"
+                  variant="contained"
+                  color="primary"
+                  onClick={this.submitHourlyIntervention}
+                >
                   Submit Hourly Intervention
-                </button>
+                </Button>
               </div>
             </div>
           )}
@@ -173,9 +190,15 @@ class IndividualBehavior extends Component {
             selected={this.state.date}
             onChange={this.handleDateChange}
           />
-          <button type="button" onClick={this.getIntervention}>
+          <Button
+            type="button"
+            size="medium"
+            variant="contained"
+            color="primary"
+            onClick={this.getIntervention}
+          >
             Get Daily Report
-          </button>
+          </Button>
         </div>
         <DailyInterventionOutput />
       </div>

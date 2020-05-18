@@ -7,7 +7,6 @@ const moment = require("moment");
 class DailyInterventionOutput extends Component {
   render() {
     const interventionData = this.props.store.intervention[0] || {};
-    console.log("Data:", interventionData);
     return (
       <div>
         {interventionData.date !== "" && (
