@@ -45,7 +45,7 @@ class Student extends Component {
 
   render() {
     return (
-      <div>
+      <div className="basic_container">
         <StudentData />
         <div>
           <h1>Daily Intervention Reports</h1>

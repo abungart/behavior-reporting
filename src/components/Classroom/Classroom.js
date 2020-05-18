@@ -29,10 +29,6 @@ class Classroom extends Component {
     }
   }
 
-  state = {
-    heading: "My Classroom",
-  };
-
   startIntervention = () => {
     console.log("Start Intervention");
     for (let student of this.props.store.userList) {
@@ -48,8 +44,7 @@ class Classroom extends Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.state.heading}</h2>
+      <div className="classroom_container">
         <Grid
           container
           spacing={2}

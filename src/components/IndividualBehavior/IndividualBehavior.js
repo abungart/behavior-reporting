@@ -26,7 +26,7 @@ class IndividualBehavior extends Component {
   }
 
   state = {
-    heading: "Individual Behavior Page!",
+    heading: "Individual Student Behavior",
     pointGoal: 0,
     notes: "",
     date: new Date(),
@@ -112,7 +112,7 @@ class IndividualBehavior extends Component {
   render() {
     const { selectedOption } = this.state.hour;
     return (
-      <div>
+      <div className="basic_container">
         <h2>"{this.state.heading}"</h2>
         <StudentData />
         <div>
@@ -147,6 +147,7 @@ class IndividualBehavior extends Component {
                   Stop Intervention
                 </Button>
               </div>
+              <h2>Enter Hourly Intervention Data</h2>
               <div>
                 <DatePicker
                   dateFormat="yyyy/MM/dd"
@@ -157,6 +158,7 @@ class IndividualBehavior extends Component {
                   value={selectedOption}
                   onChange={this.handleHourChange}
                   options={hour}
+                  className="selector_container"
                 />
                 <label>Points this hour:</label>
                 <input
@@ -184,7 +186,7 @@ class IndividualBehavior extends Component {
           )}
         </div>
         <div>
-          <h1>Daily Intervention Reports</h1>
+          <h2>Daily Intervention Reports</h2>
           <DatePicker
             dateFormat="yyyy/MM/dd"
             selected={this.state.date}

@@ -15,15 +15,9 @@ class School extends Component {
     });
   }
 
-  state = {
-    heading: "My School",
-  };
-
   render() {
     return (
       <div>
-        <h2>"{this.state.heading}"</h2>
-
         <Grid
           container
           spacing={2}

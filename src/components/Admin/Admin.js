@@ -82,7 +82,7 @@ class Admin extends Component {
 
   render() {
     return (
-      <div>
+      <div className="basic_container">
         {this.state.inEdit === false && (
           <div>
             <p>{this.props.store.currentUserData.staff_name}</p>
