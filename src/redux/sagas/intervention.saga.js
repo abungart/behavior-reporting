@@ -14,12 +14,24 @@ function* interventionToggle(action) {
   }
 }
 
-// Intervention Inputs
-function* startDailyIntervention(action) {
+function* getInterventionToggle(action) {
   try {
-    yield axios.post("api/intervention/startDaily", action.payload);
+    const student = action.payload;
+    const response = yield axios.get(
+      `/api/intervention/interventionToggle/${student.id}`
+    );
+    yield put({ type: "SET_INTERVENTION_TOGGLE", payload: response.data });
   } catch (err) {
-    console.log("Error with StartDailyIntervention", err);
+    console.log("Error with getInterventionToggle", err);
+  }
+}
+
+// Intervention Inputs
+function* startIntervention(action) {
+  try {
+    yield axios.post("api/intervention/start", action.payload);
+  } catch (err) {
+    console.log("Error with StartIntervention", err);
   }
 }
 
@@ -84,7 +96,8 @@ function* getSchoolInterventions(action) {
 
 function* userListSaga() {
   yield takeLatest("INTERVENTION_TOGGLE", interventionToggle);
-  yield takeLatest("START_DAILY_INTERVENTION", startDailyIntervention);
+  yield takeLatest("GET_INTERVENTION_TOGGLE", getInterventionToggle);
+  yield takeLatest("START_INTERVENTION", startIntervention);
   yield takeLatest("SUBMIT_HOURLY_INTERVENTION", startHourlyIntervention);
   yield takeLatest("DAILY_INTERVENTION", getDailyIntervention);
   yield takeLatest("STUDENT_PERIOD_INTERVENTION", getStudentInterventions);

@@ -23,6 +23,11 @@ const hour = [
 class IndividualBehavior extends Component {
   componentDidMount() {
     console.log("Individual Behavior Mounted", this.props.store.user);
+
+    this.props.dispatch({
+      type: "GET_INTERVENTION_TOGGLE",
+      payload: this.props.store.user.id,
+    });
   }
 
   state = {
@@ -39,6 +44,7 @@ class IndividualBehavior extends Component {
       user: this.props.store.studentInfo.username,
       toggle: this.props.store.studentInfo.in_intervention,
       points: this.state.pointGoal,
+      id: this.props.store.studentInfo.id,
     };
     console.log("in intervention toggle", interventionToggle);
     if (this.props.store.studentInfo.in_intervention === false) {
@@ -47,6 +53,12 @@ class IndividualBehavior extends Component {
       interventionToggle.toggle = false;
     }
     console.log("Intervention Toggle info:", interventionToggle);
+    if (interventionToggle.toggle === true) {
+      this.props.dispatch({
+        type: "START_INTERVENTION",
+        payload: interventionToggle,
+      });
+    }
 
     this.props.dispatch({
       type: "INTERVENTION_TOGGLE",
@@ -116,7 +128,7 @@ class IndividualBehavior extends Component {
         <h2>"{this.state.heading}"</h2>
         <StudentData />
         <div>
-          <h2>Start Intervention</h2>
+          <h2>Intervention</h2>
           {this.props.store.studentInfo.in_intervention === false && (
             <div>
               <label>Points Goal</label>

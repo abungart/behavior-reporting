@@ -12,8 +12,8 @@ const router = express.Router();
 router.put("/interventionToggle", (req, res) => {
   const userToggle = req.body;
   console.log("In PUT:", userToggle);
-  const queryText = `UPDATE "student" SET "in_intervention" = $1, "point_goal" = $2 WHERE "username" = $3;`;
-  const queryValues = [userToggle.toggle, userToggle.points, userToggle.user];
+  const queryText = `UPDATE "student" SET "in_intervention" = $1 WHERE "username" = $2;`;
+  const queryValues = [userToggle.toggle, userToggle.user];
 
   pool
     .query(queryText, queryValues)
@@ -26,12 +26,25 @@ router.put("/interventionToggle", (req, res) => {
     });
 });
 
+router.get("/interventionToggle", (req, res) => {
+  const queryText = `SELECT * FROM "intervention_toggle" WHERE "student_id" = $1;`;
+  pool
+    .query(queryText, [req.params.id])
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log("Error completing GET interventionToggle", err);
+      res.sendStatus(500);
+    });
+});
+
 // Start Daily Intervention For Class
-router.post("/startDaily", (req, res) => {
+router.post("/start", (req, res) => {
   const userInfo = req.body;
-  const queryText = `INSERT INTO "intervention"
-    ("student_id", "daily_goal") VALUES ($1, $2);`;
-  const queryValues = [userInfo.id, userInfo.point_goal];
+  const queryText = `INSERT INTO "intervention_toggle"
+    ("student_id", "point_goal") VALUES ($1, $2);`;
+  const queryValues = [userInfo.id, userInfo.points];
 
   pool
     .query(queryText, queryValues)
@@ -39,7 +52,7 @@ router.post("/startDaily", (req, res) => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.log("Error in POST startDaily", err);
+      console.log("Error in POST start", err);
       res.sendStatus(500);
     });
 });

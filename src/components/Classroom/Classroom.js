@@ -7,7 +7,6 @@ import StudentListItem from "../StudentListItem/StudentListItem";
 import InterventionStart from "../InterventionStart/InterventionStart";
 
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 
 import "./Classroom.css";
 
@@ -28,19 +27,6 @@ class Classroom extends Component {
       });
     }
   }
-
-  startIntervention = () => {
-    console.log("Start Intervention");
-    for (let student of this.props.store.userList) {
-      if (student.in_intervention === true) {
-        console.log("Intervention List", student);
-        this.props.dispatch({
-          type: "START_DAILY_INTERVENTION",
-          payload: student,
-        });
-      }
-    }
-  };
 
   render() {
     return (
@@ -86,15 +72,6 @@ class Classroom extends Component {
                   );
                 })}
               </ul>
-              <Button
-                type="button"
-                variant="contained"
-                color="primary"
-                size="medium"
-                onClick={this.startIntervention}
-              >
-                Start Daily Interventions
-              </Button>
             </div>
           </Grid>
         </Grid>
