@@ -35,11 +35,11 @@ function* startIntervention(action) {
   }
 }
 
-function* startHourlyIntervention(action) {
+function* submitHourlyIntervention(action) {
   try {
-    yield axios.put("/api/intervention/hourlyUpdate", action.payload);
+    yield axios.post("/api/intervention/hourlyUpdate", action.payload);
   } catch (err) {
-    console.log("Error with startHourlyIntervention", err);
+    console.log("Error with submitHourlyIntervention", err);
   }
 }
 
@@ -98,7 +98,7 @@ function* userListSaga() {
   yield takeLatest("INTERVENTION_TOGGLE", interventionToggle);
   yield takeLatest("GET_INTERVENTION_TOGGLE", getInterventionToggle);
   yield takeLatest("START_INTERVENTION", startIntervention);
-  yield takeLatest("SUBMIT_HOURLY_INTERVENTION", startHourlyIntervention);
+  yield takeLatest("SUBMIT_HOURLY_INTERVENTION", submitHourlyIntervention);
   yield takeLatest("DAILY_INTERVENTION", getDailyIntervention);
   yield takeLatest("STUDENT_PERIOD_INTERVENTION", getStudentInterventions);
   yield takeLatest("TEACHER_INTERVENTION", getTeacherInterventions);

@@ -58,10 +58,10 @@ router.post("/start", (req, res) => {
 });
 
 // Hourly Update for Student's Intervention
-router.put("/hourlyUpdate", (req, res) => {
+router.post("/hourlyUpdate", (req, res) => {
   const update = req.body;
 
-  let queryText = `UPDATE "intervention" SET "${update.hour}_points" = $1, "${update.hour}_notes" = $2, "${update.hour}_teacher" = $3 WHERE "student_id" = $4 AND "date" = $5;`;
+  let queryText = `INSERT INTO "intervention" ("points", "notes", "teacher_id", "student_id", "date", "hour") VALUES ($1, $2, $3, $4, $5, $6);`;
 
   const queryValues = [
     update.points,
@@ -69,6 +69,7 @@ router.put("/hourlyUpdate", (req, res) => {
     update.teacher,
     update.student,
     update.date,
+    update.hour,
   ];
   pool
     .query(queryText, queryValues)
