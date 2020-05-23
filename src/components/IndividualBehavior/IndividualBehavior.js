@@ -36,6 +36,7 @@ class IndividualBehavior extends Component {
     notes: "",
     date: new Date(),
     hour: "",
+    getIntervention: false,
   };
 
   // Button handlers
@@ -89,6 +90,10 @@ class IndividualBehavior extends Component {
       date: moment(this.state.date).format("YYYY-MM-DD"),
       student: this.props.store.studentInfo.id,
     };
+    this.setState({
+      getIntervention: true,
+    });
+
     console.log("Intervention Criteria", interventionCriteria);
     this.props.dispatch({
       type: "DAILY_INTERVENTION",
@@ -214,7 +219,7 @@ class IndividualBehavior extends Component {
             Get Daily Report
           </Button>
         </div>
-        <DailyInterventionOutput />
+        {this.state.getIntervention === true && <DailyInterventionOutput />}
       </div>
     );
   }

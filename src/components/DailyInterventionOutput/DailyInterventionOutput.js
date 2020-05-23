@@ -7,7 +7,8 @@ const moment = require("moment");
 
 class DailyInterventionOutput extends Component {
   render() {
-    const interventionData = this.props.store.intervention[0] || {};
+    const interventionData = this.props.store.intervention || {};
+    console.log("intervention Data:", interventionData);
     return (
       <div>
         {interventionData.date !== "" && (
@@ -25,46 +26,15 @@ class DailyInterventionOutput extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>8am to 9am</td>
-                  <td>{interventionData["8_points"]}</td>
-                  <td>{interventionData["8_notes"]}</td>
-                </tr>
-                <tr>
-                  <td>9am to 10am</td>
-                  <td>{interventionData["9_points"]}</td>
-                  <td>{interventionData["9_notes"]}</td>
-                </tr>
-                <tr>
-                  <td>10am to 11am</td>
-                  <td>{interventionData["10_points"]}</td>
-                  <td>{interventionData["10_notes"]}</td>
-                </tr>
-                <tr>
-                  <td>11am to 12pm</td>
-                  <td>{interventionData["11_points"]}</td>
-                  <td>{interventionData["11_notes"]}</td>
-                </tr>
-                <tr>
-                  <td>12pm to 1pm</td>
-                  <td>{interventionData["12_points"]}</td>
-                  <td>{interventionData["12_notes"]}</td>
-                </tr>
-                <tr>
-                  <td>1pm to 2pm</td>
-                  <td>{interventionData["1_points"]}</td>
-                  <td>{interventionData["1_notes"]}</td>
-                </tr>
-                <tr>
-                  <td>2pm to 3pm</td>
-                  <td>{interventionData["2_points"]}</td>
-                  <td>{interventionData["2_notes"]}</td>
-                </tr>
-                <tr>
-                  <td>3pm to 4pm</td>
-                  <td>{interventionData["3_points"]}</td>
-                  <td>{interventionData["3_notes"]}</td>
-                </tr>
+                {interventionData.map((interventionItem) => {
+                  return (
+                    <tr>
+                      <td>{interventionItem.hour}am</td>
+                      <td>{interventionItem.points}</td>
+                      <td>{interventionItem.notes}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
