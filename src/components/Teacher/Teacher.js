@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = (theme) => ({
@@ -71,12 +72,12 @@ class Teacher extends Component {
   };
 
   // Status Toggles
-  requestSelect = () => {
+  classroomSelect = () => {
     this.setState({
       status: "Classroom",
     });
   };
-  mySelect = () => {
+  interventionSelect = () => {
     this.setState({
       status: "Intervention",
     });
@@ -219,6 +220,28 @@ class Teacher extends Component {
               </Button>
             </div>
           )}
+          <div>
+            <Box display="flex" justifyContent="center" m={1} p={1}>
+              <Tabs
+                value={this.state.tabValue}
+                onChange={this.onChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+              >
+                <Tab
+                  label="Classroom"
+                  onClick={this.classroomSelect}
+                  color="secondary"
+                ></Tab>
+                <Tab
+                  label="Intervention"
+                  onClick={this.interventionSelect}
+                  color="secondary"
+                ></Tab>
+              </Tabs>
+            </Box>
+          </div>
           <div className="classroom_container">
             <Grid
               container
