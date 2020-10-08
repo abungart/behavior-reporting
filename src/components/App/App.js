@@ -22,7 +22,6 @@ import LoginPage from "../LoginPage/LoginPage";
 import StaffRegister from "../StaffRegistration/StaffRegistration";
 import StudentRegister from "../StudentRegistration/StudentRegistration";
 import IndividualBehavior from "../IndividualBehavior/IndividualBehavior";
-import Classroom from "../Classroom/Classroom";
 import School from "../School/School";
 
 import mapStoreToProps from "../../redux/mapStoreToProps";
@@ -53,7 +52,6 @@ class App extends Component {
             <ProtectedRoute exact path="/teacher" component={TeacherPage} />
             <ProtectedRoute exact path="/specials" component={SpecialsPage} />
             <ProtectedRoute exact path="/student" component={StudentPage} />
-            <ProtectedRoute exact path="/classroom" component={Classroom} />
             <ProtectedRoute exact path="/school" component={School} />
             <ProtectedRoute
               exact
