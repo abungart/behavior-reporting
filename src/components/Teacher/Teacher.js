@@ -243,13 +243,7 @@ class Teacher extends Component {
             </Box>
           </div>
           <div className="classroom_container">
-            <Grid
-              container
-              spacing={2}
-              justify="space-between"
-              direction="row"
-              alignItems="flex-start"
-            >
+            {this.state.status === "Classroom" && (
               <Grid
                 container
                 item
@@ -267,6 +261,8 @@ class Teacher extends Component {
                   })}
                 </ul>
               </Grid>
+            )}
+            {this.state.status === "Intervention" && (
               <Grid
                 container
                 item
@@ -289,7 +285,7 @@ class Teacher extends Component {
                   </ul>
                 </div>
               </Grid>
-            </Grid>
+            )}
           </div>
           <div>
             <LogOutButton className="log-in" />
