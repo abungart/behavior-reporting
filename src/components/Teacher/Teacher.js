@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import InterventionStart from "../InterventionStart/InterventionStart";
+import StudentListItem from "../StudentListItem/StudentListItem";
+
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -167,10 +171,58 @@ class Teacher extends Component {
             </Button>
           </div>
         )}
-        <Link to="/classroom">
-          <h1>Classroom</h1>
-        </Link>
-        <LogOutButton className="log-in" />
+        <div className="classroom_container">
+          <Grid
+            container
+            spacing={2}
+            justify="space-between"
+            direction="row"
+            alignItems="flex-start"
+          >
+            <Grid
+              container
+              item
+              lg={7}
+              spacing={2}
+              justify="space-between"
+              direction="row"
+              alignItems="flex-start"
+            >
+              <ul>
+                {this.props.store.userList.map((userItem) => {
+                  return (
+                    <StudentListItem key={userItem.id} userItem={userItem} />
+                  );
+                })}
+              </ul>
+            </Grid>
+            <Grid
+              container
+              item
+              lg={5}
+              justify="space-between"
+              direction="row"
+              alignItems="flex-end"
+            >
+              <div>
+                <h2>Intervention List</h2>
+                <ul>
+                  {this.props.store.userList.map((userItem) => {
+                    return (
+                      <InterventionStart
+                        key={userItem.id}
+                        userItem={userItem}
+                      />
+                    );
+                  })}
+                </ul>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+        <div>
+          <LogOutButton className="log-in" />
+        </div>
       </div>
     );
   }
