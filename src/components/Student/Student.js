@@ -59,7 +59,6 @@ class Student extends Component {
           </button>
         </div>
         <DailyInterventionOutput />
-        <LogOutButton className="log-in" />
       </div>
     );
   }

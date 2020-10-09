@@ -285,9 +285,6 @@ class Teacher extends Component {
               </Paper>
             )}
           </div>
-          <div>
-            <LogOutButton className="log-in" />
-          </div>
         </CssBaseline>
       </div>
     );

@@ -159,7 +159,6 @@ class Admin extends Component {
         <Link to="/school">
           <h1>School</h1>
         </Link>
-        <LogOutButton className="log-in" />
       </div>
     );
   }

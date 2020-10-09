@@ -31,7 +31,6 @@ class School extends Component {
             })}
           </ul>
         </Grid>
-        <LogOutButton className="log-in" />
       </div>
     );
   }
