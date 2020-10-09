@@ -244,15 +244,14 @@ class Teacher extends Component {
           </div>
           <div className="classroom_container">
             {this.state.status === "Classroom" && (
-              <Grid
-                container
-                item
-                lg={7}
-                spacing={2}
-                justify="space-between"
-                direction="row"
-                alignItems="flex-start"
-              >
+              <Paper styles={{ root: styles.root }} elevation={1}>
+                <Typography
+                  classes={{ root: styles.padding }}
+                  variant="h6"
+                  align="center"
+                >
+                  Class
+                </Typography>
                 <ul>
                   {this.props.store.userList.map((userItem) => {
                     return (
@@ -260,19 +259,18 @@ class Teacher extends Component {
                     );
                   })}
                 </ul>
-              </Grid>
+              </Paper>
             )}
             {this.state.status === "Intervention" && (
-              <Grid
-                container
-                item
-                lg={5}
-                justify="space-between"
-                direction="row"
-                alignItems="flex-end"
-              >
+              <Paper styles={{ root: styles.root }} elevation={1}>
                 <div>
-                  <h2>Intervention List</h2>
+                  <Typography
+                    classes={{ root: styles.padding }}
+                    variant="h6"
+                    align="center"
+                  >
+                    Intervention List
+                  </Typography>
                   <ul>
                     {this.props.store.userList.map((userItem) => {
                       return (
@@ -284,7 +282,7 @@ class Teacher extends Component {
                     })}
                   </ul>
                 </div>
-              </Grid>
+              </Paper>
             )}
           </div>
           <div>
