@@ -5,6 +5,8 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 import Button from "@material-ui/core/Button";
 
+import "./StudentListItem.css";
+
 class StudentListItem extends Component {
   studentBehavior = () => {
     console.log("In studentBehavior Click", this.props.userItem);
@@ -21,7 +23,6 @@ class StudentListItem extends Component {
       <li className="user_list">
         <div>
           <h2 onClick={this.studentBehavior}>{this.props.userItem.name}</h2>
-          <> </>
           <Button color="primary" variant="contained" size="small">
             +
           </Button>

@@ -1,0 +1,11 @@
+h2 {
+    display: inline-block;
+    margin: 0;
+    margin-right: 42px;
+    padding: 15px;
+}
+
+button {
+    display: inline-block;
+    vertical-align: top;
+}
