@@ -12,6 +12,7 @@ class StudentData extends Component {
     home_phone: "",
     cell_phone: "",
     work_phone: "",
+    id: this.props.store.currentUserData.id,
   };
 
   // EDIT button handlers
@@ -72,6 +73,18 @@ class StudentData extends Component {
       inEdit: false,
     });
     console.log("Edit Cancelled");
+  };
+
+  deleteClick = () => {
+    console.log("In Delete Button", this.props.userItem.username);
+    this.props.dispatch({
+      type: "DELETE_STUDENT",
+      payload: this.state,
+    });
+    this.props.dispatch({
+      type: "GET_STUDENT_LIST",
+      payload: this.props.store.user,
+    });
   };
 
   // Handle text input
@@ -188,6 +201,14 @@ class StudentData extends Component {
               onClick={this.cancelEdit}
             >
               Cancel
+            </Button>
+            <Button
+              color="secondary"
+              variant="contained"
+              size="small"
+              onClick={this.deleteClick}
+            >
+              Remove Student
             </Button>
           </div>
         )}

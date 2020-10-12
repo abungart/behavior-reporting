@@ -6,23 +6,6 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import Button from "@material-ui/core/Button";
 
 class StudentListItem extends Component {
-  state = {
-    deleteUsername: this.props.userItem.username,
-    id: this.props.store.currentUserData.id,
-  };
-
-  deleteClick = () => {
-    console.log("In Delete Button", this.props.userItem.username);
-    this.props.dispatch({
-      type: "DELETE_STUDENT",
-      payload: this.state,
-    });
-    this.props.dispatch({
-      type: "GET_STUDENT_LIST",
-      payload: this.props.store.user,
-    });
-  };
-
   studentBehavior = () => {
     console.log("In studentBehavior Click", this.props.userItem);
     this.props.dispatch({
@@ -36,18 +19,16 @@ class StudentListItem extends Component {
   render() {
     return (
       <li className="user_list">
-        <h2 onClick={this.studentBehavior}>
-          {this.props.userItem.name}
+        <div>
+          <h2 onClick={this.studentBehavior}>{this.props.userItem.name}</h2>
           <> </>
-          <Button
-            color="secondary"
-            variant="contained"
-            size="small"
-            onClick={this.deleteClick}
-          >
-            Delete Student
+          <Button color="primary" variant="contained" size="small">
+            +
           </Button>
-        </h2>
+          <Button color="secondary" variant="contained" size="small">
+            -
+          </Button>
+        </div>
       </li>
     );
   }
