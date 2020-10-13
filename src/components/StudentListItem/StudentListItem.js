@@ -21,15 +21,14 @@ class StudentListItem extends Component {
   render() {
     return (
       <li className="user_list">
-        <div>
-          <h2 onClick={this.studentBehavior}>{this.props.userItem.name}</h2>
-          <Button color="primary" variant="contained" size="small">
-            +
-          </Button>
-          <Button color="secondary" variant="contained" size="small">
-            -
-          </Button>
-        </div>
+        <h2 onClick={this.studentBehavior}>{this.props.userItem.name}</h2>
+        <Button color="secondary" variant="contained" size="small">
+          -
+        </Button>
+        <h2>Bulldog Points</h2>
+        <Button color="primary" variant="contained" size="small">
+          +
+        </Button>
       </li>
     );
   }
