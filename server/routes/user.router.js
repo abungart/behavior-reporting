@@ -98,7 +98,7 @@ router.get("/staffList", rejectUnauthenticated, (req, res) => {
 
 // GET student list data
 router.get("/studentList/:id", rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT "student".id, "student".name, "student".username, "student".in_intervention FROM "student"
+  const queryText = `SELECT "student".id, "student".name, "student".username, "student".in_intervention, "student".behavior_points FROM "student"
   JOIN "user" ON "student".teacher_id = "user".id
   WHERE "student".teacher_id = $1 ORDER BY "student".name ASC;`;
   pool

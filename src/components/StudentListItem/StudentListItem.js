@@ -9,7 +9,6 @@ import "./StudentListItem.css";
 
 class StudentListItem extends Component {
   studentBehavior = () => {
-    console.log("In studentBehavior Click", this.props.userItem);
     this.props.dispatch({
       type: "FETCH_STUDENT_SEPARATE",
       payload: this.props.userItem,
@@ -25,7 +24,7 @@ class StudentListItem extends Component {
         <Button color="secondary" variant="contained" size="small">
           -
         </Button>
-        <h2>Bulldog Points</h2>
+        <h2>{this.props.userItem.behavior_points} Bulldog Points</h2>
         <Button color="primary" variant="contained" size="small">
           +
         </Button>

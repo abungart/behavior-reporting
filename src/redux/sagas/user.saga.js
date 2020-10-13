@@ -30,7 +30,6 @@ function* fetchStaff(action) {
     const thisUser = action.payload;
     const pageText = `/api/user/staff/${thisUser.username}`;
     const response = yield axios.get(pageText);
-    console.log("in saga", response.data[0]);
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
@@ -47,7 +46,6 @@ function* fetchStudent(action) {
     const thisUser = action.payload;
     const pageText = `/api/user/student/${thisUser.username}`;
     const response = yield axios.get(pageText);
-    console.log("in saga", response.data[0]);
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let

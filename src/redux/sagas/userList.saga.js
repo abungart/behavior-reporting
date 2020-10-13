@@ -18,7 +18,6 @@ function* getStaffList() {
 function* getStudentList(action) {
   try {
     const thisUser = action.payload;
-    console.log("This User:", thisUser);
     const queryText = `/api/user/studentList/${thisUser.id}`;
     const response = yield axios.get(queryText);
 
