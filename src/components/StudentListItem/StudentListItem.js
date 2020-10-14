@@ -19,7 +19,7 @@ class StudentListItem extends Component {
 
   render() {
     return (
-      <li className="user_list">
+      <div className="user_list">
         <h2 onClick={this.studentBehavior}>{this.props.userItem.name}</h2>
         <Button color="secondary" variant="contained" size="small">
           -
@@ -28,7 +28,7 @@ class StudentListItem extends Component {
         <Button color="primary" variant="contained" size="small">
           +
         </Button>
-      </li>
+      </div>
     );
   }
 }

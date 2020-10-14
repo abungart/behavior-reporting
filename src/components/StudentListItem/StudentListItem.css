@@ -9,3 +9,8 @@ button {
     display: inline-block;
     vertical-align: top;
 }
+
+.user_list {
+    margin: auto;
+    width: 50%;
+}

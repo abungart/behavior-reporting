@@ -250,15 +250,15 @@ class Teacher extends Component {
                   variant="h6"
                   align="center"
                 >
-                  Class
+                  Classroom
                 </Typography>
-                <ul>
+                <div>
                   {this.props.store.userList.map((userItem) => {
                     return (
                       <StudentListItem key={userItem.id} userItem={userItem} />
                     );
                   })}
-                </ul>
+                </div>
               </Paper>
             )}
             {this.state.status === "Intervention" && (
