@@ -73,6 +73,17 @@ class Specials extends Component {
     console.log("Edit Cancelled");
   };
 
+  deleteClick = () => {
+    console.log("In Delete Button", this.props.userItem.username);
+    this.props.dispatch({
+      type: "DELETE_STAFF",
+      payload: `/api/user/deleteStaff/${this.props.userItem.username}`,
+    });
+    this.props.dispatch({
+      type: "GET_STAFF_LIST",
+    });
+  };
+
   // Handle text input
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
@@ -154,11 +165,18 @@ class Specials extends Component {
             >
               Cancel
             </Button>
+            {this.props.store.user.role === "admin" && (
+              <Button
+                size="small"
+                variant="contained"
+                color="secondary"
+                onClick={this.deleteClick}
+              >
+                Delete Staff
+              </Button>
+            )}
           </div>
         )}
-        <Link to="/school">
-          <h1>School</h1>
-        </Link>
       </div>
     );
   }
