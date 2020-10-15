@@ -4,6 +4,8 @@ import { withRouter, Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import Button from "@material-ui/core/Button";
+import StaffListItem from "../StaffListItem/StaffListItem";
+import Grid from "@material-ui/core/Grid";
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -156,9 +158,19 @@ class Admin extends Component {
             </Button>
           </div>
         )}
-        <Link to="/school">
-          <h1>School</h1>
-        </Link>
+        <Grid
+          container
+          spacing={2}
+          justify="center"
+          direction="row"
+          alignContent="center"
+        >
+          <ul>
+            {this.props.store.userList.map((userItem) => {
+              return <StaffListItem key={userItem.id} userItem={userItem} />;
+            })}
+          </ul>
+        </Grid>
       </div>
     );
   }
