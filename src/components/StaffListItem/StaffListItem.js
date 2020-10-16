@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import { withRouter } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+
+import "./StaffListItem.css";
 
 class ListItem extends Component {
   chooseStaff = () => {
